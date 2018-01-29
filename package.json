@@ -1,0 +1,33 @@
+{
+  "name": "@11ty/eleventy-plugin-syntaxhighlight",
+  "version": "1.0.0",
+  "description": "A pack of Eleventy plugins for syntax highlighting using the Liquid templating engine.",
+  "main": ".eleventy.js",
+  "scripts": {
+    "test": "npx ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/11ty/eleventy-plugin-syntaxhighlight.git"
+  },
+  "keywords": [
+    "eleventy"
+  ],
+  "author": {
+    "name": "Zach Leatherman",
+    "email": "zachleatherman@gmail.com",
+    "url": "https://zachleat.com/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/11ty/eleventy-plugin-syntaxhighlight/issues"
+  },
+  "homepage": "https://github.com/11ty/eleventy-plugin-syntaxhighlight#readme",
+  "devDependencies": {
+    "ava": "^0.25.0"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^0.2.13",
+    "prismjs": "^1.10.0"
+  }
+}
