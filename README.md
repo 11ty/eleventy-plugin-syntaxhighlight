@@ -2,7 +2,20 @@
 
 A pack of Eleventy plugins for syntax highlighting using the Liquid templating engine.
 
+## Installation
+
+Available on [npm](https://www.npmjs.com/package/@11ty/eleventy-plugin-syntaxhighlight).
+
+```
+npm install @11ty/eleventy-plugin-syntaxhighlight --save
+```
+
 ## Usage
+
+### Supplies: Two Liquid Tags
+
+* `{% highlight %}`: syntax highlights a block of code using PrismJS.
+* `{% highlight-plain %}`: adds `<pre><code>` around a block of code and offers the line-highlighting feature set as `highlight`.
 
 ### Prism Syntax Highlighter
 
