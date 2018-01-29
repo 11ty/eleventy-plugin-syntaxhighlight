@@ -1,6 +1,6 @@
 # eleventy-plugin-syntaxhighlight
 
-A pack of Eleventy plugins for syntax highlighting using the Liquid templating engine.
+A pack of [Eleventy](https://github.com/11ty/eleventy) plugins for syntax highlighting using the Liquid templating engine.
 
 ## Installation
 
