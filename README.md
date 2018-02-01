@@ -10,7 +10,7 @@ Available on [npm](https://www.npmjs.com/package/@11ty/eleventy-plugin-syntaxhig
 npm install @11ty/eleventy-plugin-syntaxhighlight --save
 ```
 
-Open up your Eleventy config file, probably `.eleventy.js`:
+Open up your Eleventy config file (probably `.eleventy.js`) and use `addPlugin`:
 
 ```
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
@@ -20,6 +20,8 @@ module.exports = function(eleventyConfig) {
 ```
 
 If you use the Prism version, you are responsible for including [your favorite theme CSS](https://github.com/PrismJS/prism-themes)!
+
+[Read more about Eleventy plugins.](https://github.com/11ty/eleventy/blob/master/docs/plugins.md)
 
 ## Usage
 
