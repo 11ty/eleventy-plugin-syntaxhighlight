@@ -1,6 +1,6 @@
 # eleventy-plugin-syntaxhighlight
 
-A pack of [Eleventy](https://github.com/11ty/eleventy) plugins for syntax highlighting using the Liquid templating engine.
+A pack of [Eleventy](https://github.com/11ty/eleventy) plugins for syntax highlighting using the Liquid templating engine. No runtime JavaScript here, these highlight transformations are all done at build-time.
 
 ## Installation
 
@@ -9,6 +9,8 @@ Available on [npm](https://www.npmjs.com/package/@11ty/eleventy-plugin-syntaxhig
 ```
 npm install @11ty/eleventy-plugin-syntaxhighlight --save
 ```
+
+If you use the Prism version, you are responsible for including [your favorite theme CSS](https://github.com/PrismJS/prism-themes)!
 
 ## Usage
 
