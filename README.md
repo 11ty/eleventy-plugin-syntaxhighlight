@@ -32,6 +32,8 @@ If you use the Prism version, you are responsible for including [your favorite t
 
 ### Prism Syntax Highlighter
 
+* [List of supported PrismJS languages](http://prismjs.com/#languages-list)
+
 ```
 {% highlight js %}
 function myFunction() {
