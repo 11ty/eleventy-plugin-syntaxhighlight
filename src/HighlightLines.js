@@ -26,7 +26,7 @@ class HighlightLines {
   }
 
   isHighlighted(lineNumber) {
-    return !!this.highlights[lineNumber]
+    return !!this.highlights[lineNumber];
   }
 }
 

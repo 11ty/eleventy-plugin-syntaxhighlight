@@ -1,4 +1,4 @@
-const HighlightLines = require('./HighlightLines');
+const HighlightLinesGroup = require('./HighlightLinesGroup');
 
 class LiquidHighlight {
   constructor(liquidEngine) {
@@ -21,10 +21,8 @@ class LiquidHighlight {
         parse: function(tagToken, remainTokens) {
           let split = tagToken.args.split(" ");
 
-          this.language = split[0];
-          this.highlights = new HighlightLines(split.length === 2 ? split[1] : "");
-          this.highlightsAdd = new HighlightLines(split.length === 3 ? split[1] : "");
-          this.highlightsRemove = new HighlightLines(split.length === 3 ? split[2] : "");
+          this.language = split.shift();
+          this.highlights = new HighlightLinesGroup(split.join(" "));
 
           this.tokens = [];
 
@@ -35,7 +33,7 @@ class LiquidHighlight {
               if (token.name === 'endhighlight') {
                 stream.stop();
               } else {
-                this.tokens.push(token); 
+                this.tokens.push(token);
               }
             })
             .on('end', x => {
@@ -61,14 +59,14 @@ class LiquidHighlight {
               }
             }
 
-            return '<div class="highlight-line' +
-              (this.highlights.isHighlighted(j) ? ' highlight-line-active' : '') +
-              (this.highlightsAdd.isHighlighted(j) ? ' highlight-line-add' : '') +
-              (this.highlightsRemove.isHighlighted(j) ? ' highlight-line-remove' : '') +
+            return "<div class=\"highlight-line" +
+              (this.highlights.isHighlighted(j) ? " highlight-line-active" : "") +
+              (this.highlights.isHighlightedAdd(j) ? " highlight-line-add" : "") +
+              (this.highlights.isHighlightedRemove(j) ? " highlight-line-remove" : "") +
               (classHookClasses.length ? " " + classHookClasses.join(" ") : "") +
-              '">' +
+              "\">" +
               line +
-              '</div>';
+              "</div>";
           }.bind(this));
 
           return Promise.resolve(`<pre class="language-${this.language}"><code class="language-${this.language}">` + lines.join("") + "</code></pre>");

@@ -5,10 +5,14 @@ module.exports = function(liquidEngine) {
   let highlight = new LiquidHighlight(liquidEngine);
 
   highlight.addHook(function(language, htmlStr, lines) {
-    if (! Prism.languages[ language ]) {
-      require(`prismjs/components/prism-${language}`);      
+    if( language === "text" ) {
+      return htmlStr;
+    } else {
+      if (! Prism.languages[ language ]) {
+        require(`prismjs/components/prism-${language}`);
+      }
+      return Prism.highlight(htmlStr, Prism.languages[ language ]);
     }
-    return Prism.highlight(htmlStr, Prism.languages[ language ]);
   });
 
   return highlight.getObject();

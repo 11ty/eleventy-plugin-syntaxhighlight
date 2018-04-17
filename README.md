@@ -25,10 +25,54 @@ If you use the Prism version, you are responsible for including [your favorite t
 
 ## Usage
 
+### Supplies: `markdown-it` Highlighter
+
+Optionally specify a language after the start of the markdown fenced code block. Use `text` to bypass the syntax highlighter but keep the line highlighting features.
+
+````
+``` js
+function myFunction() {
+  return true;
+}
+```
+````
+
+````
+// Line highlighting classes (single highlight)
+// Adds `highlight-line-active` class to lines 1,3,4,5 (for line highlighting)
+``` js/1,3-5
+function myFunction() {
+  // …
+  return true;
+}
+```
+````
+
+````
+// Line highlighting classes (add and remove mode)
+// Adds `highlight-line-add` class to lines 1,3
+// Adds `highlight-line-remove` class to lines 5,6,7,8
+``` js/1,3/5-8
+function myFunction() {
+  // …
+  return true;
+}
+```
+````
+
+````
+``` text/1-2
+function myFunction() {
+  let highlighted = true;
+  return highlighted;
+}
+```
+````
+
 ### Supplies: Two Liquid Tags
 
 * `{% highlight %}`: syntax highlights a block of code using PrismJS.
-* `{% highlight-plain %}`: adds `<pre><code>` around a block of code and offers the line-highlighting feature set as `highlight`.
+* `{% highlight-plain %}`: (Deprecated)
 
 ### Prism Syntax Highlighter
 
@@ -44,7 +88,7 @@ function myFunction() {
 
 ```
 // Line highlighting classes (single highlight)
-// Adds `highlight-line-active` class to lines 1,3,5 (for line highlighting)
+// Adds `highlight-line-active` class to lines 1,3,4,5 (for line highlighting)
 {% highlight js 1,3-5 %}
 function myFunction() {
   // …
@@ -65,17 +109,19 @@ function myFunction() {
 {% endhighlight %}
 ```
 
-### Plain Code Block
+```
+// no syntax highlighting, use line highlights
+{% highlight text 1-2 %}
+function myFunction() {
+  let highlighted = true;
+  return highlighted;
+}
+{% endhighlight %}
+```
 
-No syntax highlighting here but you do get the line highlighting features shown in the Prism examples above.
+### Plain Code Block (Deprecated)
 
-```
-{% highlight-plain js %}
-```
-
-```
-{% highlight-plain js 1,3-5 %}
-```
+This tag is now deprecated—use `{% highlight text %}` instead.
 
 ```
 {% highlight-plain js 1,3 5-8 %}
