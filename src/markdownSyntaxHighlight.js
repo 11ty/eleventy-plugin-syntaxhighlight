@@ -1,4 +1,5 @@
 const Prism = require("prismjs");
+const PrismLoader = require("prismjs/components/index.js");
 const HighlightLinesGroup = require("./HighlightLinesGroup");
 
 module.exports = function(str, language) {
@@ -17,10 +18,10 @@ module.exports = function(str, language) {
     html = str;
   } else {
     if( !Prism.languages[ language ] ) {
-      require(`prismjs/components/prism-${language}`);
+      PrismLoader([language]);
     }
 
-    html = Prism.highlight(str, Prism.languages[ language ]);
+    html = Prism.highlight(str, Prism.languages[ language ], language);
   }
 
   let highlights = new HighlightLinesGroup(split.join("/"), "/");
