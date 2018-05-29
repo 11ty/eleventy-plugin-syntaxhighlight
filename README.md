@@ -19,15 +19,23 @@ module.exports = function(eleventyConfig) {
 };
 ```
 
-If you use the Prism version, you are responsible for including [your favorite theme CSS](https://github.com/PrismJS/prism-themes)!
+You are responsible for including [your favorite PrismJS theme CSS](https://github.com/PrismJS/prism-themes)!
 
 [Read more about Eleventy plugins.](https://github.com/11ty/eleventy/blob/master/docs/plugins.md)
 
 ## Usage
 
-### Supplies: `markdown-it` Highlighter
+### Supplies:
 
-Optionally specify a language after the start of the markdown fenced code block. Use `text` to bypass the syntax highlighter but keep the line highlighting features.
+* Markdown Highlighter: syntax highlights using PrismJS
+* Liquid Tag `{% highlight %}`: syntax highlights using PrismJS.
+* Liquid Tag `{% highlight-plain %}`: (Deprecated)
+
+### Markdown Highlighter
+
+Optionally specify a language after the start of the markdown fenced code block.
+
+* [List of supported PrismJS languages](http://prismjs.com/#languages-list)
 
 ````
 ``` js
@@ -60,6 +68,10 @@ function myFunction() {
 ```
 ````
 
+#### Plain text
+
+Use `text` to use the line highlighting features without PrismJS.
+
 ````
 ``` text/1-2
 function myFunction() {
@@ -69,12 +81,7 @@ function myFunction() {
 ```
 ````
 
-### Supplies: Two Liquid Tags
-
-* `{% highlight %}`: syntax highlights a block of code using PrismJS.
-* `{% highlight-plain %}`: (Deprecated)
-
-### Prism Syntax Highlighter
+### Liquid Tag: Prism Syntax Highlighter
 
 * [List of supported PrismJS languages](http://prismjs.com/#languages-list)
 
@@ -109,8 +116,11 @@ function myFunction() {
 {% endhighlight %}
 ```
 
+#### Plain text
+
+Use `text` to use the line highlighting features without PrismJS.
+
 ```
-// no syntax highlighting, use line highlights
 {% highlight text 1-2 %}
 function myFunction() {
   let highlighted = true;
@@ -119,9 +129,9 @@ function myFunction() {
 {% endhighlight %}
 ```
 
-### Plain Code Block (Deprecated)
+### Liquid Tag: Plain Code Block (Deprecated)
 
-This tag is now deprecated—use `{% highlight text %}` instead.
+⚠️ This tag is now deprecated—use `{% highlight text %}` instead.
 
 ```
 {% highlight-plain js 1,3 5-8 %}
