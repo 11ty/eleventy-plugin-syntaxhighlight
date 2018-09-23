@@ -37,7 +37,7 @@ module.exports = function(str, language) {
       (highlights.isHighlightedAdd(j) ? " highlight-line-add" : "") +
       (highlights.isHighlightedRemove(j) ? " highlight-line-remove" : "") +
       "\">" +
-      (line || '\n') +
+      (line || '\n') + // https://github.com/11ty/eleventy-plugin-syntaxhighlight/pull/5
       "</div>";
   });
 
