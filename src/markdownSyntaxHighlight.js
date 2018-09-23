@@ -26,20 +26,16 @@ module.exports = function(str, language) {
 
   let highlights = new HighlightLinesGroup(split.join("/"), "/");
 
-  let lines = html.split("\n");
+  let lines = html.split("\n").slice(0, -1); // The last line is empty.
   let highlightedLines = lines.map(function(line, j) {
-    if( j + 1 === lines.length ) {
-      return "";
-    }
-
-    return "<div class=\"highlight-line" +
+    return "<span class=\"highlight-line" +
       (highlights.isHighlighted(j) ? " highlight-line-active" : "") +
       (highlights.isHighlightedAdd(j) ? " highlight-line-add" : "") +
       (highlights.isHighlightedRemove(j) ? " highlight-line-remove" : "") +
       "\">" +
-      (line || '\n') + // https://github.com/11ty/eleventy-plugin-syntaxhighlight/pull/5
-      "</div>";
+      line +
+      "</span>";
   });
 
-  return `<pre class="language-${language}"><code class="language-${language}">${highlightedLines.join("")}</code></pre>`;
+  return `<pre class="language-${language}"><code class="language-${language}">${highlightedLines.join("<br>")}</code></pre>`;
 };
