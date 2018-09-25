@@ -28,13 +28,16 @@ module.exports = function(str, language) {
 
   let lines = html.split("\n").slice(0, -1); // The last line is empty.
   let highlightedLines = lines.map(function(line, j) {
-    return "<span class=\"highlight-line" +
-      (highlights.isHighlighted(j) ? " highlight-line-active" : "") +
-      (highlights.isHighlightedAdd(j) ? " highlight-line-add" : "") +
-      (highlights.isHighlightedRemove(j) ? " highlight-line-remove" : "") +
-      "\">" +
-      line +
-      "</span>";
+    if (highlights.isHighlighted(j)) {
+      return "<mark class=\"highlight-line highlight-line-active\">" + line + "</mark>";
+    }
+    if (highlights.isHighlightedAdd(j)) {
+      return "<ins class=\"highlight-line highlight-line-add\">" + line + "</ins>";
+    }
+    if (highlights.isHighlightedRemove(j)) {
+      return "<del class=\"highlight-line highlight-line-remove\">" + line + "</del>";
+    }
+    return "<span class=\"highlight-line\">" + line + "</span>";
   });
 
   return `<pre class="language-${language}"><code class="language-${language}">${highlightedLines.join("<br>")}</code></pre>`;
