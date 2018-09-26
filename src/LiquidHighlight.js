@@ -1,4 +1,4 @@
-const HighlightLinesGroup = require('./HighlightLinesGroup');
+const HighlightLinesGroup = require("./HighlightLinesGroup");
 
 class LiquidHighlight {
   constructor(liquidEngine) {
@@ -29,14 +29,14 @@ class LiquidHighlight {
           var stream = highlighter.liquidEngine.parser.parseStream(remainTokens);
 
           stream
-            .on('token', token => {
-              if (token.name === 'endhighlight') {
+            .on("token", token => {
+              if (token.name === "endhighlight") {
                 stream.stop();
               } else {
                 this.tokens.push(token);
               }
             })
-            .on('end', x => {
+            .on("end", x => {
               throw new Error("tag highlight not closed");
             });
 
@@ -44,7 +44,7 @@ class LiquidHighlight {
         },
         render: function(scope, hash) {
           let tokens = this.tokens.map(token => token.raw);
-          let tokenStr = tokens.join('').trim();
+          let tokenStr = tokens.join("").trim();
 
           for( let hook of highlighter.hooks ) {
             tokenStr = hook.call(this, this.language, tokenStr);
@@ -59,14 +59,7 @@ class LiquidHighlight {
               }
             }
 
-            return "<div class=\"highlight-line" +
-              (this.highlights.isHighlighted(j) ? " highlight-line-active" : "") +
-              (this.highlights.isHighlightedAdd(j) ? " highlight-line-add" : "") +
-              (this.highlights.isHighlightedRemove(j) ? " highlight-line-remove" : "") +
-              (classHookClasses.length ? " " + classHookClasses.join(" ") : "") +
-              "\">" +
-              line +
-              "</div>";
+            return this.highlights.getLineMarkup(j, line, classHookClasses);
           }.bind(this));
 
           return Promise.resolve(`<pre class="language-${this.language}"><code class="language-${this.language}">` + lines.join("") + "</code></pre>");

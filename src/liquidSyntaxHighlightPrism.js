@@ -1,4 +1,4 @@
-const Prism = require('prismjs');
+const Prism = require("prismjs");
 const LiquidHighlight = require( "./LiquidHighlight" );
 
 module.exports = function(liquidEngine) {

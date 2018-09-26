@@ -26,6 +26,22 @@ class HighlightLinesGroup {
   isHighlightedRemove(lineNumber) {
     return this.highlightsRemove.isHighlighted(lineNumber);
   }
+
+  getLineMarkup(lineNumber, line, extraClasses = []) {
+    let extraClassesStr = (extraClasses.length ? " " + extraClasses.join(" ") : "");
+
+    if (this.isHighlighted(lineNumber)) {
+      return `<mark class="highlight-line highlight-line-active${extraClassesStr}">${line}</mark>`;
+    }
+    if (this.isHighlightedAdd(lineNumber)) {
+      return `<ins class="highlight-line highlight-line-add${extraClassesStr}">${line}</ins>`;
+    }
+    if (this.isHighlightedRemove(lineNumber)) {
+      return `<del class="highlight-line highlight-line-remove${extraClassesStr}">${line}</del>`;
+    }
+
+    return `<span class="highlight-line${extraClassesStr}">${line}</span>`;
+  }
 }
 
 module.exports = HighlightLinesGroup;
