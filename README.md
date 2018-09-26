@@ -29,7 +29,6 @@ You are responsible for including [your favorite PrismJS theme CSS](https://gith
 
 * Markdown Highlighter: syntax highlights using PrismJS
 * Liquid Tag `{% highlight %}`: syntax highlights using PrismJS.
-* Liquid Tag `{% highlight-plain %}`: (Deprecated)
 
 ### Markdown Highlighter
 
@@ -129,10 +128,3 @@ function myFunction() {
 {% endhighlight %}
 ```
 
-### Liquid Tag: Plain Code Block (Deprecated)
-
-⚠️ This tag is now deprecated—use `{% highlight text %}` instead.
-
-```
-{% highlight-plain js 1,3 5-8 %}
-```
