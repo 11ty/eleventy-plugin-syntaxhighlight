@@ -21,11 +21,11 @@ module.exports = function(eleventyConfig) {
 
 You are responsible for including [your favorite PrismJS theme CSS](https://github.com/PrismJS/prism-themes)!
 
-[Read more about Eleventy plugins.](https://github.com/11ty/eleventy/blob/master/docs/plugins.md)
+Read more about [Eleventy plugins.](https://www.11ty.io/docs/plugins/)
 
 ## Usage
 
-### Supplies:
+### This plugin provides:
 
 * Markdown Highlighter: syntax highlights using PrismJS
 * Liquid Tag `{% highlight %}`: syntax highlights using PrismJS.
@@ -128,3 +128,35 @@ function myFunction() {
 {% endhighlight %}
 ```
 
+### Sample Line Highlighting CSS
+
+```
+.highlight-line {
+  display: block;
+  padding: 0.125em 1em;
+  text-decoration: none; /* override del, ins, mark defaults */
+  color: inherit; /* override del, ins, mark defaults */
+}
+.highlight-line:not(:empty) + br {
+  display: none;
+}
+
+/*
+ * Dark theme
+ */
+
+.highlight-line-isdir {
+  color: #b0b0b0;
+  background-color: #222;
+}
+.highlight-line-active {
+  background-color: #444;
+  background-color: hsla(0, 0%, 27%, .8);
+}
+.highlight-line-add {
+  background-color: #45844b;
+}
+.highlight-line-remove {
+  background-color: #902f2f;
+}
+```
