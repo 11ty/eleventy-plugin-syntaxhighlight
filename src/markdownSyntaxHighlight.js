@@ -31,5 +31,5 @@ module.exports = function(str, language) {
     return highlights.getLineMarkup(j, line);
   });
 
-  return `<pre class="language-${language}"><code class="language-${language}">${highlightedLines.join("")}</code></pre>`;
+  return `<pre class="language-${language}"><code class="language-${language}">${highlightedLines.join("<br>")}</code></pre>`;
 };

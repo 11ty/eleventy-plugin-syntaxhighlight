@@ -62,7 +62,7 @@ class LiquidHighlight {
             return this.highlights.getLineMarkup(j, line, classHookClasses);
           }.bind(this));
 
-          return Promise.resolve(`<pre class="language-${this.language}"><code class="language-${this.language}">` + lines.join("") + "</code></pre>");
+          return Promise.resolve(`<pre class="language-${this.language}"><code class="language-${this.language}">` + lines.join("<br>") + "</code></pre>");
         }
       };
     };
