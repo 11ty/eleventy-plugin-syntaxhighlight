@@ -1,4 +1,5 @@
 const Prism = require("prismjs");
+const PrismLoader = require("prismjs/components/index.js");
 const LiquidHighlight = require( "./LiquidHighlight" );
 
 module.exports = function(liquidEngine) {
@@ -8,9 +9,10 @@ module.exports = function(liquidEngine) {
     if( language === "text" ) {
       return htmlStr;
     } else {
-      if (! Prism.languages[ language ]) {
-        require(`prismjs/components/prism-${language}`);
+      if( !Prism.languages[ language ] ) {
+        PrismLoader([language]);
       }
+
       return Prism.highlight(htmlStr, Prism.languages[ language ]);
     }
   });
