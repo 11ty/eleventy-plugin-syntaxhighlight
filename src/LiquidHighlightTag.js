@@ -1,18 +1,9 @@
 const HighlightLinesGroup = require("./HighlightLinesGroup");
+const HighlightPairedShortcode = require("./HighlightPairedShortcode");
 
-class LiquidHighlight {
+class LiquidHighlightTag {
   constructor(liquidEngine) {
     this.liquidEngine = liquidEngine;
-    this.hooks = [];
-    this.classHooks = [];
-  }
-
-  addHook(hookFunction) {
-    this.hooks.push(hookFunction);
-  }
-
-  addClassHook(hookFunction) {
-    this.classHooks.push(hookFunction);
   }
 
   getObject() {
@@ -22,7 +13,7 @@ class LiquidHighlight {
           let split = tagToken.args.split(" ");
 
           this.language = split.shift();
-          this.highlights = new HighlightLinesGroup(split.join(" "));
+          this.highlightLines = split.join(" ");
 
           this.tokens = [];
 
@@ -46,23 +37,7 @@ class LiquidHighlight {
           let tokens = this.tokens.map(token => token.raw);
           let tokenStr = tokens.join("").trim();
 
-          for( let hook of highlighter.hooks ) {
-            tokenStr = hook.call(this, this.language, tokenStr);
-          }
-
-          let lines = tokenStr.split("\n").map(function(line, j) {
-            let classHookClasses = [];
-            for( let classHook of highlighter.classHooks ) {
-              let ret = classHook(this.language, line, j);
-              if( ret ) {
-                classHookClasses.push(ret);
-              }
-            }
-
-            return this.highlights.getLineMarkup(j, line, classHookClasses);
-          }.bind(this));
-
-          return Promise.resolve(`<pre class="language-${this.language}"><code class="language-${this.language}">` + lines.join("<br>") + "</code></pre>");
+          return Promise.resolve(HighlightPairedShortcode(tokenStr, this.language, this.highlightLines));
         }
       };
     };
@@ -71,4 +46,4 @@ class LiquidHighlight {
   }
 }
 
-module.exports = LiquidHighlight;
+module.exports = LiquidHighlightTag;

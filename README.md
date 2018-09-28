@@ -23,12 +23,36 @@ You are responsible for including [your favorite PrismJS theme CSS](https://gith
 
 Read more about [Eleventy plugins.](https://www.11ty.io/docs/plugins/)
 
+### Options
+
+Optionally pass in an options object as the second argument to `addPlugin` to further customize this plugin pack.
+
+```
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+module.exports = function(eleventyConfig) {
+  eleventyConfig.addPlugin(syntaxHighlight, {
+
+    // Change which syntax highlighters are installed
+    templateFormats: ["*"], // default
+
+    // Or, just njk and md syntax highlighters (do not install liquid)
+    // templateFormats: ["njk", "md"],
+
+    // init callback lets you customize Prism
+    init: function({ Prism }) {
+      Prism.languages.myCustomLanguage = /* */;
+    }
+  });
+};
+```
+
 ## Usage
 
 ### This plugin provides:
 
 * Markdown Highlighter: syntax highlights using PrismJS
-* Liquid Tag `{% highlight %}`: syntax highlights using PrismJS.
+* Liquid Custom Tag `{% highlight %}`: syntax highlights using PrismJS.
+* Nunjucks Paired Shortcode `{% highlight %}`: syntax highlights using PrismJS.
 
 ### Markdown Highlighter
 
@@ -37,6 +61,7 @@ Optionally specify a language after the start of the markdown fenced code block.
 * [List of supported PrismJS languages](http://prismjs.com/#languages-list)
 
 ````
+<!-- Markdown Template -->
 ``` js
 function myFunction() {
   return true;
@@ -45,8 +70,12 @@ function myFunction() {
 ````
 
 ````
-// Line highlighting classes (single highlight)
-// Adds `highlight-line-active` class to lines 1,3,4,5 (for line highlighting)
+<!--
+  Line highlighting classes (single highlight)
+  Adds `highlight-line-active` class to lines 1,3,4,5 (for line highlighting)
+-->
+
+<!-- Markdown Template -->
 ``` js/1,3-5
 function myFunction() {
   // …
@@ -56,9 +85,13 @@ function myFunction() {
 ````
 
 ````
-// Line highlighting classes (add and remove mode)
-// Adds `highlight-line-add` class to lines 1,3
-// Adds `highlight-line-remove` class to lines 5,6,7,8
+<!--
+  Line highlighting classes (add and remove mode)
+  Adds `highlight-line-add` class to lines 1,3
+  Adds `highlight-line-remove` class to lines 5,6,7,8
+-->
+
+<!-- Markdown Template -->
 ``` js/1,3/5-8
 function myFunction() {
   // …
@@ -85,6 +118,7 @@ function myFunction() {
 * [List of supported PrismJS languages](http://prismjs.com/#languages-list)
 
 ```
+<!-- Liquid Template -->
 {% highlight js %}
 function myFunction() {
   return true;
@@ -93,8 +127,12 @@ function myFunction() {
 ```
 
 ```
-// Line highlighting classes (single highlight)
-// Adds `highlight-line-active` class to lines 1,3,4,5 (for line highlighting)
+<!--
+  Line highlighting classes (single highlight)
+  Adds `highlight-line-active` class to lines 1,3,4,5 (for line highlighting)
+-->
+
+<!-- Liquid Template -->
 {% highlight js 1,3-5 %}
 function myFunction() {
   // …
@@ -104,9 +142,13 @@ function myFunction() {
 ```
 
 ```
-// Line highlighting classes (add and remove)
-// Adds `highlight-line-add` class to lines 1,3
-// Adds `highlight-line-remove` class to lines 5,6,7,8
+<!--
+  Line highlighting classes (add and remove)
+  Adds `highlight-line-add` class to lines 1,3
+  Adds `highlight-line-remove` class to lines 5,6,7,8
+-->
+
+<!-- Liquid Template -->
 {% highlight js 1,3 5-8 %}
 function myFunction() {
   // …
@@ -120,7 +162,66 @@ function myFunction() {
 Use `text` to use the line highlighting features without PrismJS.
 
 ```
+<!-- Liquid Template -->
 {% highlight text 1-2 %}
+function myFunction() {
+  let highlighted = true;
+  return highlighted;
+}
+{% endhighlight %}
+```
+
+### Nunjucks Paired Shortcode: Prism Syntax Highlighter
+
+* [List of supported PrismJS languages](http://prismjs.com/#languages-list)
+
+```
+<!-- Nunjucks Template -->
+{% highlight "js" %}
+function myFunction() {
+  return true;
+}
+{% endhighlight %}
+```
+
+```
+<!--
+  Line highlighting classes (single highlight)
+  Adds `highlight-line-active` class to lines 1,3,4,5 (for line highlighting)
+-->
+
+<!-- Nunjucks Template -->
+{% highlight "js 1,3-5" %}
+function myFunction() {
+  // …
+  return true;
+}
+{% endhighlight %}
+```
+
+```
+<!--
+  Line highlighting classes (add and remove)
+  Adds `highlight-line-add` class to lines 1,3
+  Adds `highlight-line-remove` class to lines 5,6,7,8
+-->
+
+<!-- Nunjucks Template -->
+{% highlight "js 1,3 5-8" %}
+function myFunction() {
+  // …
+  return true;
+}
+{% endhighlight %}
+```
+
+#### Plain text
+
+Use `text` to use the line highlighting features without PrismJS.
+
+```
+<!-- Nunjucks Template -->
+{% highlight "text 1-2" %}
 function myFunction() {
   let highlighted = true;
   return highlighted;
@@ -130,14 +231,19 @@ function myFunction() {
 
 ### Sample Line Highlighting CSS
 
-```
+```css
 .highlight-line {
   display: block;
-  padding: 0.125em 1em;
   text-decoration: none; /* override del, ins, mark defaults */
   color: inherit; /* override del, ins, mark defaults */
 }
-.highlight-line:not(:empty) + br {
+
+/* allow highlighting empty lines */
+.highlight-line:empty:before {
+  content: " ";
+}
+/* avoid double line breaks when using display: block; */
+.highlight-line + br {
   display: none;
 }
 

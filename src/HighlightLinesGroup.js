@@ -5,9 +5,9 @@ class HighlightLinesGroup {
     this.init(str, delimiter);
   }
 
-  init(str, delimiter) {
+  init(str = "", delimiter = " ") {
     this.str = str;
-    this.delimiter = delimiter || " ";
+    this.delimiter = delimiter;
 
     let split = str.split(this.delimiter);
     this.highlights = new HighlightLines(split.length === 1 ? split[0] : "");

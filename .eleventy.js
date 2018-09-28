@@ -1,14 +1,31 @@
-const liquidPlain = require("./src/liquidSyntaxHighlightPlain");
-const liquidPrismJs = require("./src/liquidSyntaxHighlightPrism");
+const Prism = require("prismjs");
+const hasTemplateFormat = require("./src/hasTemplateFormat");
+const HighlightPairedShortcode = require("./src/HighlightPairedShortcode");
+const LiquidHighlightTag = require("./src/LiquidHighlightTag");
 const markdownPrismJs = require("./src/markdownSyntaxHighlight");
 
-module.exports = function(eleventyConfig, pluginNamespace) {
-  eleventyConfig.namespace(pluginNamespace, () => {
-    // compatibility with existing {% highlight js %} and others
-    eleventyConfig.addLiquidTag("highlight", liquidPrismJs);
-    eleventyConfig.addMarkdownHighlighter(markdownPrismJs);
+module.exports = {
+  initArguments: { Prism },
+  configFunction: function(eleventyConfig, options = {}) {
+    // TODO hbs?
+    if( hasTemplateFormat(options.templateFormats, "liquid") ) {
+      eleventyConfig.addLiquidTag("highlight", (liquidEngine) => {
+        // {% highlight js 0 2 %}
+        let highlight = new LiquidHighlightTag(liquidEngine);
+        return highlight.getObject();
+      });
+    }
 
-    // Deprecated, use {% highlight text %} instead.
-    eleventyConfig.addLiquidTag("highlight-plain", liquidPlain);
-  });
+    if( hasTemplateFormat(options.templateFormats, "njk") ) {
+      eleventyConfig.addPairedNunjucksShortcode("highlight", (content, args) => {
+        // {% highlight "js 0 2-3" %}
+        let [language, ...highlightNumbers] = args.split(" ");
+        return HighlightPairedShortcode(content, language, highlightNumbers.join(" "));
+      });
+    }
+
+    if( hasTemplateFormat(options.templateFormats, "md") ) {
+      eleventyConfig.addMarkdownHighlighter(markdownPrismJs);
+    }
+  }
 };
