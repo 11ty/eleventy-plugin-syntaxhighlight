@@ -233,19 +233,25 @@ function myFunction() {
 
 ```css
 .highlight-line {
-  display: block;
-  text-decoration: none; /* override del, ins, mark defaults */
-  color: inherit; /* override del, ins, mark defaults */
+  display: inline-block;
+
+  /* del, ins, mark default styles */
+  text-decoration: none;
+  color: inherit;
 }
 
 /* allow highlighting empty lines */
 .highlight-line:empty:before {
   content: " ";
 }
-/* avoid double line breaks when using display: block; */
-.highlight-line + br {
-  display: none;
+
+.highlight-line:not(:last-child) {
+  min-width: 100%;
 }
+.highlight-line .highlight-line:not(:last-child) {
+  min-width: 0;
+}
+
 
 /*
  * Dark theme
