@@ -1,6 +1,6 @@
 {
   "name": "@11ty/eleventy-plugin-syntaxhighlight",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A pack of Eleventy plugins for syntax highlighting for Markdown and Liquid templates.",
   "main": ".eleventy.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "url": "git+https://github.com/11ty/eleventy-plugin-syntaxhighlight.git"
   },
   "keywords": [
-    "eleventy"
+    "eleventy",
+    "eleventy-plugin"
   ],
   "author": {
     "name": "Zach Leatherman",
@@ -24,10 +25,10 @@
   },
   "homepage": "https://github.com/11ty/eleventy-plugin-syntaxhighlight#readme",
   "devDependencies": {
+    "@11ty/eleventy": "^0.6.0",
     "ava": "^0.25.0"
   },
   "dependencies": {
-    "@11ty/eleventy": "^0.5.4",
     "prismjs": "^1.15.0"
   }
 }
