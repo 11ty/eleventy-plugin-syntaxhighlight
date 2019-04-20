@@ -1,6 +1,6 @@
 {
   "name": "@11ty/eleventy-plugin-syntaxhighlight",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A pack of Eleventy plugins for syntax highlighting for Markdown and Liquid templates.",
   "main": ".eleventy.js",
   "scripts": {
