@@ -76,3 +76,11 @@ test("Add/Remove New Delimiter", t => {
   t.is(hilite.isHighlightedRemove(4), false);
   t.is(hilite.isHighlightedRemove(5), false);
 });
+
+test("Split Line Markup", t => {
+  let hilite = new HighlightLinesGroup("", " ");
+  t.is(hilite.splitLineMarkup("Test", "BEFORE", "AFTER"), "BEFORETestAFTER");
+  t.is(hilite.splitLineMarkup("<span>Test</span>", "BEFORE", "AFTER"), "BEFORE<span>Test</span>AFTER");
+  t.is(hilite.splitLineMarkup("<span>Test", "BEFORE", "AFTER"), "<span>BEFORETestAFTER");
+  t.is(hilite.splitLineMarkup("Test</span>", "BEFORE", "AFTER"), "BEFORETestAFTER</span>");
+});

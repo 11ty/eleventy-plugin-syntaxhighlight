@@ -1,4 +1,3 @@
-const HighlightLinesGroup = require("./HighlightLinesGroup");
 const HighlightPairedShortcode = require("./HighlightPairedShortcode");
 
 class LiquidHighlightTag {

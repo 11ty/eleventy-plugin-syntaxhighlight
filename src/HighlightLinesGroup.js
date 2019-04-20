@@ -27,20 +27,43 @@ class HighlightLinesGroup {
     return this.highlightsRemove.isHighlighted(lineNumber);
   }
 
+  splitLineMarkup(line, before, after) {
+    let startCount = line.split("<span").length;
+    let endCount = line.split("</span").length;
+
+    if( startCount > endCount ) {
+      if( startCount === 2 ) { // simple cases, one orphan <span>
+        let split = line.split(">");
+        let first = split.shift();
+        return first + ">" + before + split.join(">") + after;
+      }
+      return line;
+    } else if( endCount > startCount ) {
+      if( endCount === 2 ) { // simple cases, one orphan </span>
+        let split = line.split("</");
+        let last = split.pop();
+        return before + split.join("</") + after + "</" + last;
+      }
+      return line;
+    }
+
+    return before + line + after;
+  }
+
   getLineMarkup(lineNumber, line, extraClasses = []) {
     let extraClassesStr = (extraClasses.length ? " " + extraClasses.join(" ") : "");
 
     if (this.isHighlighted(lineNumber)) {
-      return `<mark class="highlight-line highlight-line-active${extraClassesStr}">${line}</mark>`;
+      return this.splitLineMarkup(line, `<mark class="highlight-line highlight-line-active${extraClassesStr}">`, `</mark>`);
     }
     if (this.isHighlightedAdd(lineNumber)) {
-      return `<ins class="highlight-line highlight-line-add${extraClassesStr}">${line}</ins>`;
+      return this.splitLineMarkup(line, `<ins class="highlight-line highlight-line-add${extraClassesStr}">`, `</ins>`);
     }
     if (this.isHighlightedRemove(lineNumber)) {
-      return `<del class="highlight-line highlight-line-remove${extraClassesStr}">${line}</del>`;
+      return this.splitLineMarkup(line, `<del class="highlight-line highlight-line-remove${extraClassesStr}">`, `</del>`);
     }
 
-    return `<span class="highlight-line${extraClassesStr}">${line}</span>`;
+    return this.splitLineMarkup( line, `<span class="highlight-line${extraClassesStr}">`, `</span>`);
   }
 }
 
