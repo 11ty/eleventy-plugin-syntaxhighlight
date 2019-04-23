@@ -31,19 +31,11 @@ class HighlightLinesGroup {
     let startCount = line.split("<span").length;
     let endCount = line.split("</span").length;
 
+    // skip line highlighting if there is an uneven number of <span> or </span> on the line.
+    // for example, we can’t wrap <span> with <span><span></span>
     if( startCount > endCount ) {
-      if( startCount === 2 ) { // simple cases, one orphan <span>
-        let split = line.split(">");
-        let first = split.shift();
-        return first + ">" + before + split.join(">") + after;
-      }
       return line;
     } else if( endCount > startCount ) {
-      if( endCount === 2 ) { // simple cases, one orphan </span>
-        let split = line.split("</");
-        let last = split.pop();
-        return before + split.join("</") + after + "</" + last;
-      }
       return line;
     }
 
