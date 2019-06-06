@@ -1,7 +1,7 @@
 function LineNumbers(lineCount) {
   let lineNumbersWrapper = "";
   if (!lineCount) {
-    return "";
+    return lineNumbersWrapper;
   }
 
   const linesNum = lineCount;
