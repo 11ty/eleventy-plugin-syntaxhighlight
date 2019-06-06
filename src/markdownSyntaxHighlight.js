@@ -1,6 +1,7 @@
 const Prism = require("prismjs");
 const PrismLoader = require("prismjs/components/index.js");
 const HighlightLinesGroup = require("./HighlightLinesGroup");
+const LineNumbers = require("./LineNumbers");
 
 module.exports = function(str, language) {
   if(!language) {
@@ -31,5 +32,15 @@ module.exports = function(str, language) {
     return highlights.getLineMarkup(j, line);
   });
 
-  return `<pre class="language-${language}"><code class="language-${language}">${highlightedLines.join("<br>")}</code></pre>`;
+
+  // Not sure how to configure this on/off
+  const numberLines = LineNumbers(highlightedLines.length);
+  const preClasses = [
+    `language-${language}`,
+  ];
+  if (numberLines !== "") {
+    preClasses.push("line-numbers");
+  }
+
+  return `<pre class="${preClasses.join(" ")}"><code class="language-${language}">${highlightedLines.join("<br>")}${numberLines}</code></pre>`;
 };
