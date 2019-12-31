@@ -4,7 +4,8 @@
   "description": "A pack of Eleventy plugins for syntax highlighting for Markdown and Liquid templates.",
   "main": ".eleventy.js",
   "scripts": {
-    "test": "npx ava"
+    "test": "npx ava",
+    "demo": "npx @11ty/eleventy --input=demo --output=demo/_site --config=demo/eleventy-config.js"
   },
   "repository": {
     "type": "git",

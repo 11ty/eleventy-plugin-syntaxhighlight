@@ -4,6 +4,13 @@ import HighlightLinesGroup from "../src/HighlightLinesGroup";
 test("Empty", t => {
   let hilite = new HighlightLinesGroup("");
   t.is(hilite.isHighlighted(0), false);
+  t.is(hilite.isHighlighted(1), false);
+});
+
+test("Highlight irrelevant (-)", t => {
+  let hilite = new HighlightLinesGroup("-");
+  t.is(hilite.isHighlighted(0), false);
+  t.is(hilite.isHighlighted(1), false);
 });
 
 test("Highlight simple (0)", t => {
@@ -81,6 +88,6 @@ test("Split Line Markup", t => {
   let hilite = new HighlightLinesGroup("", " ");
   t.is(hilite.splitLineMarkup("Test", "BEFORE", "AFTER"), "BEFORETestAFTER");
   t.is(hilite.splitLineMarkup("<span>Test</span>", "BEFORE", "AFTER"), "BEFORE<span>Test</span>AFTER");
-  t.is(hilite.splitLineMarkup("<span>Test", "BEFORE", "AFTER"), "<span>BEFORETestAFTER");
-  t.is(hilite.splitLineMarkup("Test</span>", "BEFORE", "AFTER"), "BEFORETestAFTER</span>");
+  t.is(hilite.splitLineMarkup("<span>Test", "BEFORE", "AFTER"), "<span>Test");
+  t.is(hilite.splitLineMarkup("Test</span>", "BEFORE", "AFTER"), "Test</span>");
 });

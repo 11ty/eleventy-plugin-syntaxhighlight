@@ -27,15 +27,21 @@ class HighlightLinesGroup {
     return this.highlightsRemove.isHighlighted(lineNumber);
   }
 
-  splitLineMarkup(line, before, after) {
+  hasTagMismatch(line) {
     let startCount = line.split("<span").length;
     let endCount = line.split("</span").length;
+    if( startCount !== endCount ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  splitLineMarkup(line, before, after) {
 
     // skip line highlighting if there is an uneven number of <span> or </span> on the line.
     // for example, we can’t wrap <span> with <span><span></span>
-    if( startCount > endCount ) {
-      return line;
-    } else if( endCount > startCount ) {
+    if(this.hasTagMismatch(line)) {
       return line;
     }
 

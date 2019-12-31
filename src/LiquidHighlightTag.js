@@ -5,7 +5,7 @@ class LiquidHighlightTag {
     this.liquidEngine = liquidEngine;
   }
 
-  getObject() {
+  getObject(options = {}) {
     let ret = function(highlighter) {
       return {
         parse: function(tagToken, remainTokens) {
@@ -36,7 +36,7 @@ class LiquidHighlightTag {
           let tokens = this.tokens.map(token => token.raw);
           let tokenStr = tokens.join("").trim();
 
-          return Promise.resolve(HighlightPairedShortcode(tokenStr, this.language, this.highlightLines));
+          return Promise.resolve(HighlightPairedShortcode(tokenStr, this.language, this.highlightLines, options));
         }
       };
     };
