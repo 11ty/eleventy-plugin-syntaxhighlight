@@ -1,7 +1,10 @@
 {
   "name": "@11ty/eleventy-plugin-syntaxhighlight",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "A pack of Eleventy plugins for syntax highlighting for Markdown and Liquid templates.",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": ".eleventy.js",
   "scripts": {
     "test": "npx ava",
@@ -10,6 +13,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/11ty/eleventy-plugin-syntaxhighlight.git"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/11ty"
   },
   "keywords": [
     "eleventy",
@@ -24,12 +31,15 @@
   "bugs": {
     "url": "https://github.com/11ty/eleventy-plugin-syntaxhighlight/issues"
   },
-  "homepage": "https://github.com/11ty/eleventy-plugin-syntaxhighlight#readme",
+  "homepage": "https://www.11ty.dev/docs/plugins/syntaxhighlight/",
+  "peerDependencies": {
+    "@11ty/eleventy": "^0.9.0"
+  },
   "devDependencies": {
-    "@11ty/eleventy": "^0.6.0",
-    "ava": "^0.25.0"
+    "ava": "^0.25.0",
+    "@11ty/eleventy": "^0.9.0"
   },
   "dependencies": {
-    "prismjs": "^1.15.0"
+    "prismjs": "^1.17.1"
   }
 }
