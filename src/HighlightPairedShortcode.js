@@ -1,6 +1,5 @@
 const Prism = require("prismjs");
-const PrismLoader = require("prismjs/components/index.js");
-const PrismAlias = require("./PrismNormalizeAlias");
+const PrismLoader = require("./PrismLoader");
 const HighlightLinesGroup = require("./HighlightLinesGroup");
 
 module.exports = function(content, language, highlightNumbers, options = {}) {
@@ -8,11 +7,7 @@ module.exports = function(content, language, highlightNumbers, options = {}) {
   if( language === "text" ) {
     highlightedContent = content.trim();
   } else {
-    let alias = PrismAlias(language);
-    if(!Prism.languages[ alias ]) {
-      PrismLoader(alias);
-    }
-    highlightedContent = Prism.highlight(content.trim(), Prism.languages[ alias ], language);
+    highlightedContent = Prism.highlight(content.trim(), PrismLoader(language), language);
   }
 
   let group = new HighlightLinesGroup(highlightNumbers);

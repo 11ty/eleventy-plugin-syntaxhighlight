@@ -50,3 +50,9 @@ document.body.textContent = greeter(user);`
 
   t.is(await HighlightPairedShortcode(script, "ts"), `<pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">greeter</span><span class="token punctuation">(</span><span class="token parameter">person</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token keyword">return</span> <span class="token string">"Hello, "</span> <span class="token operator">+</span> person<span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">let</span> user <span class="token operator">=</span> <span class="token string">"Jane User"</span><span class="token punctuation">;</span><br><br>document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token function">greeter</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 });
+
+test("Test loader invalid language", async t => {
+  await t.throwsAsync(async () => {
+    await HighlightPairedShortcode("", "asldkjflksdaj");
+  })
+});

@@ -1,7 +1,11 @@
 const Prism = require("prismjs");
 
+// This was added to make `ts` resolve to `typescript` correctly.
+// The Prism loader doesn’t seem to always handle aliasing correctly.
 module.exports = function(language) {
   try {
+    // Careful this is not public API stuff:
+    // https://github.com/PrismJS/prism/issues/2146
     const PrismComponents = require("prismjs/components.json");
     let langs = PrismComponents.languages;
 
