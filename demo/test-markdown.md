@@ -8,6 +8,18 @@
   </head>
   <body>
 
+```ts
+function myFunction() {
+  return true;
+}
+```
+
+```typescript
+function myFunction() {
+  return true;
+}
+```
+
 ```js
 function myFunction() {
   return true;
