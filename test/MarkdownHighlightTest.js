@@ -1,6 +1,6 @@
-import test from "ava";
-import md from "markdown-it";
-import markdownPrismJsOptions from "../src/markdownSyntaxHighlightOptions";
+const test = require("ava");
+const md = require("markdown-it");
+const markdownPrismJsOptions = require("../src/markdownSyntaxHighlightOptions");
 
 test("Test Markdown Highlighter", t => {
   let mdLib = md();

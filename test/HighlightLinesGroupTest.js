@@ -1,5 +1,5 @@
-import test from "ava";
-import HighlightLinesGroup from "../src/HighlightLinesGroup";
+const test = require("ava");
+const HighlightLinesGroup = require("../src/HighlightLinesGroup");
 
 test("Empty", t => {
   let hilite = new HighlightLinesGroup("");
