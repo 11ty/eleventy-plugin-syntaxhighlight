@@ -7,7 +7,8 @@ const markdownPrismJs = require("./src/markdownSyntaxHighlightOptions");
 module.exports = {
   initArguments: { Prism },
   configFunction: function(eleventyConfig, options = {}) {
-    options = Object.assign({ alwaysWrapLineHighlights: false }, options);
+    options = Object.assign({ alwaysWrapLineHighlights: false,
+                              showLineNumbers: false}, options);
 
     // TODO hbs?
     if( hasTemplateFormat(options.templateFormats, "liquid") ) {
@@ -25,6 +26,9 @@ module.exports = {
         return HighlightPairedShortcode(content, language, highlightNumbers.join(" "), options);
       });
     }
+
+    //  this is where the plugin code gets hooked up
+    //  in the default md's highlighter
 
     if( hasTemplateFormat(options.templateFormats, "md") ) {
       eleventyConfig.addMarkdownHighlighter(markdownPrismJs(options));
