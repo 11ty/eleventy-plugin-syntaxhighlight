@@ -27,7 +27,7 @@ module.exports = function(options = {}) {
 
     lines = lines.map(function(line, j) {
       if(options.alwaysWrapLineHighlights || hasHighlightNumbers) {
-        let lineContent = highlights.getLineMarkup(j, line);
+        let lineContent = highlights.getLineMarkup(j + 1, line);
         return lineContent;
       }
       return line;
