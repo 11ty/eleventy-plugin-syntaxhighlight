@@ -4,7 +4,7 @@ const HighlightLinesGroup = require("./HighlightLinesGroup");
 
 module.exports = function(content, language, highlightNumbers, options = {}) {
   // default to on
-  if(options.trimContent === "undefined" || options.trimContent) {
+  if(options.trim === undefined || options.trim === true) {
     content = content.trim();
   }
 

@@ -54,5 +54,17 @@ document.body.textContent = greeter(user);`
 test("Test loader invalid language", async t => {
   await t.throwsAsync(async () => {
     await HighlightPairedShortcode("", "asldkjflksdaj");
-  })
+  });
+});
+
+test("Trim content option (defaults true)", async t => {
+  t.is(await HighlightPairedShortcode(` alert();
+alert(); `, "js", "", {}), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+
+  t.is(await HighlightPairedShortcode(` alert();
+alert(); `, "js", "", { trim: true }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+
+  t.is(await HighlightPairedShortcode(` alert();
+alert(); `, "js", "", { trim: false }), `<pre class="language-js"><code class="language-js"> <span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre>`);
+
 });
