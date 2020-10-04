@@ -3,11 +3,16 @@ const PrismLoader = require("./PrismLoader");
 const HighlightLinesGroup = require("./HighlightLinesGroup");
 
 module.exports = function(content, language, highlightNumbers, options = {}) {
+  // default to on
+  if(options.trimContent === "undefined" || options.trimContent) {
+    content = content.trim();
+  }
+
   let highlightedContent;
   if( language === "text" ) {
-    highlightedContent = content.trim();
+    highlightedContent = content;
   } else {
-    highlightedContent = Prism.highlight(content.trim(), PrismLoader(language), language);
+    highlightedContent = Prism.highlight(content, PrismLoader(language), language);
   }
 
   let group = new HighlightLinesGroup(highlightNumbers);
