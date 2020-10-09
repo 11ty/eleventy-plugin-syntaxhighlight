@@ -2,6 +2,7 @@ const Prism = require("prismjs");
 const hasTemplateFormat = require("./src/hasTemplateFormat");
 const HighlightPairedShortcode = require("./src/HighlightPairedShortcode");
 const LiquidHighlightTag = require("./src/LiquidHighlightTag");
+const CharacterWrap = require("./src/CharacterWrap");
 const markdownPrismJs = require("./src/markdownSyntaxHighlightOptions");
 
 module.exports = {
@@ -33,3 +34,4 @@ module.exports = {
 };
 
 module.exports.pairedShortcode = HighlightPairedShortcode;
+module.exports.characterWrap = CharacterWrap;

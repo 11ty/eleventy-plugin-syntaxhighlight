@@ -41,6 +41,7 @@
     "ava": "^3.13.0"
   },
   "dependencies": {
+    "jsdom": "^16.4.0",
     "prismjs": "^1.21.0"
   }
 }
