@@ -34,4 +34,4 @@ module.exports = {
 };
 
 module.exports.pairedShortcode = HighlightPairedShortcode;
-module.exports.characterWrap = CharacterWrap;
+module.exports.CharacterWrap = CharacterWrap;

@@ -130,9 +130,9 @@ class CharacterWrap {
     }
   }
 
-  async wrapContent(content, codeFormat) {
+  wrapContent(content, codeFormat) {
     for(let transform of this.contentTransforms) {
-      let result = await transform(content);
+      let result = transform(content);
       if(result === false) {
         return content;
       }
