@@ -22,6 +22,17 @@ alert();
 \`\`\``).trim(), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 });
 
+test("Test Markdown Highlighter Line Numbers", t => {
+  let mdLib = md();
+  mdLib.set({
+    highlight: markdownPrismJsOptions({ alwaysWrapLineHighlights: true,
+      showLineNumbers: true})
+  });
+  t.is(mdLib.render(`\`\`\`js
+alert();
+\`\`\``).trim(), `<pre class="language-js line-numbers"><code class="language-js"><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>`);
+});
+
 
 // test("Test Markdown Highlighter Block Comment", t => {
 //   let mdLib = md();
