@@ -25,5 +25,5 @@ module.exports = function(content, language, highlightNumbers, options = {}) {
     return line;
   });
 
-  return `<pre class="language-${language}"><code class="language-${language}">` + lines.join("<br>") + "</code></pre>";
+  return `<pre class="language-${language}"><code class="language-${language}">` + lines.join(options.lineSeparator || "<br>") + "</code></pre>";
 };
