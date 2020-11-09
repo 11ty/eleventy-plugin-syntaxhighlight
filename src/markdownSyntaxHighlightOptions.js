@@ -4,6 +4,8 @@ const HighlightLinesGroup = require("./HighlightLinesGroup");
 
 module.exports = function(options = {}) {
   return function(str, language) {
+    language = language || options.defaultLanguage;
+
     if(!language) {
       // empty string means defer to the upstream escaping code built into markdown lib.
       return "";
