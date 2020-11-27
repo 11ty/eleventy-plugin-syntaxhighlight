@@ -27,15 +27,14 @@ class LiquidHighlightTag {
               }
             })
             .on("end", x => {
-              throw new Error("tag highlight not closed");
+              throw new Error(`tag ${tagToken.getText()} not closed`);
             });
 
           stream.start();
         },
         render: function(scope, hash) {
-          let tokens = this.tokens.map(token => token.raw);
+          let tokens = this.tokens.map(token => token.raw || token.input.substring(token.begin, token.end));
           let tokenStr = tokens.join("").trim();
-
           return Promise.resolve(HighlightPairedShortcode(tokenStr, this.language, this.highlightLines, options));
         }
       };
