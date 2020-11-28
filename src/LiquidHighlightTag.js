@@ -33,7 +33,7 @@ class LiquidHighlightTag {
       },
       render: function(scope, hash) {
         let tokens = this.tokens.map(token => {
-          return token.raw || token.input.substring(token.begin, token.end)
+          return token.raw || token.getText();
         });
         let tokenStr = tokens.join("").trim();
         return Promise.resolve(HighlightPairedShortcode(tokenStr, this.language, this.highlightLines, options));
