@@ -37,8 +37,9 @@
     "@11ty/eleventy": ">=0.5.4"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^0.11.0",
-    "ava": "^3.13.0"
+    "ava": "^3.13.0",
+    "liquidjs": "^9.16.1",
+    "markdown-it": "^12.0.2"
   },
   "dependencies": {
     "jsdom": "^16.4.0",
