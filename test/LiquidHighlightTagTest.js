@@ -17,7 +17,7 @@ test("Test Render", async t => {
 
 test("Test Highlight Tag Render", async t => {
   let engine = new Liquid();
-  let tag = new LiquidHighlightTag();
+  let tag = new LiquidHighlightTag(engine);
   engine.registerTag("highlight", tag.getObject());
 
   let rendered = await renderLiquid("{% highlight js %}var test;{% endhighlight %}", {}, engine);
