@@ -1,6 +1,5 @@
 const HighlightPairedShortcode = require("./HighlightPairedShortcode");
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+const {parseHTML} = require("linkedom");
 
 class IndexCounter {
   constructor() {
@@ -139,11 +138,11 @@ class CharacterWrap {
     }
 
     let highlightedContent = HighlightPairedShortcode(content, codeFormat, "", { trim: false });
-    let jsdoc = new JSDOM(`<html><body>${highlightedContent}</body></html>`);
-    let { document } = jsdoc.window;
+    let {document} = parseHTML(`<html><body>${highlightedContent}</body></html>`);
     let counter = new IndexCounter();
-    this.walkTree(document, document.body, counter);
-    return document.body.innerHTML;
+    let bodyEl = document.getElementsByTagName("body")[0];
+    this.walkTree(document, bodyEl, counter);
+    return bodyEl.innerHTML;
   }
 }
 
