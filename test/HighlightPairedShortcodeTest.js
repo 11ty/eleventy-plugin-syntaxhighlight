@@ -6,6 +6,11 @@ test("Base", async t => {
 alert();`, "js", "", { alwaysWrapLineHighlights: true }), `<pre class="language-js"><code class="language-js"><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>`);
 });
 
+test("Base with custom attributes", async t => {
+  t.is(await HighlightPairedShortcode(`alert();
+alert();`, "js", "", { alwaysWrapLineHighlights: true, preAttributes: { tabindex: 0 } }), `<pre class="language-js" tabindex="0"><code class="language-js"><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>`);
+});
+
 test("Base change the line separator", async t => {
   t.is(await HighlightPairedShortcode(`alert();
 alert();`, "js", "", {
