@@ -21,7 +21,7 @@ function attributeEntryToString(attribute, context) {
  * ```js
   getAttributes({
     tabindex: 0,
-    'data-language': function (context) { return content.language; },
+    'data-language': function (context) { return context.language; },
     'data-otherStuff': 'value'
   }) // => ' tabindex="0" data-language="JavaScript" data-otherStuff="value"'
   ```
