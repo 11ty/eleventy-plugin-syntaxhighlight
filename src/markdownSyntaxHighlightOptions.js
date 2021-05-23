@@ -1,8 +1,12 @@
 const Prism = require("prismjs");
 const PrismLoader = require("./PrismLoader");
 const HighlightLinesGroup = require("./HighlightLinesGroup");
+const getAttributes = require("./getAttributes");
 
-module.exports = function(options = {}) {
+module.exports = function (options = {}) {
+  const preAttributes = getAttributes(options.preAttributes)
+  const codeAttributes = getAttributes(options.codeAttributes)
+
   return function(str, language) {
     if(!language) {
       // empty string means defer to the upstream escaping code built into markdown lib.
@@ -33,6 +37,6 @@ module.exports = function(options = {}) {
       return line;
     });
 
-    return `<pre class="language-${language}"><code class="language-${language}">${lines.join(options.lineSeparator || "<br>")}</code></pre>`;
+    return `<pre class="language-${language}"${preAttributes}><code class="language-${language}"${codeAttributes}>${lines.join(options.lineSeparator || "<br>")}</code></pre>`;
   };
 };

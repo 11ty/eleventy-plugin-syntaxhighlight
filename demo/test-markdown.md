@@ -52,5 +52,11 @@ let multilineString = `
 `;
 ```
 
+## Scrollbar
+
+```js
+import { aReallyLongFunctionNameThatCouldBeLongerButThisShouldBeLongEnoughByNowHopefully as anEvenLongerFunctionNameWithMoreCharactersThanCouldBeImaginedByAnyOnePersonInThisEntireWorldOfPeopleThatOneMightKnowAtLeastThatIsWhatIsTheorizedByThisLongName } from 'wow-this-is-so-long-you-might-need-a-scrollbar-to-see-it.long-ol-file-extension-that-should-not-be-this-long-on-a-real-site-but-this-is-to-demonstrate-the-accessibility-of-tabindex-and-scrollbars.js';
+```
+
   </body>
 </html>
