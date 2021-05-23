@@ -4,10 +4,11 @@ const HighlightLinesGroup = require("./HighlightLinesGroup");
 const getAttributes = require("./getAttributes");
 
 module.exports = function (options = {}) {
-  const preAttributes = getAttributes(options.preAttributes);
-  const codeAttributes = getAttributes(options.codeAttributes);
-
   return function(str, language) {
+    const context = { content: str, language: language, options: options };
+    const preAttributes = getAttributes(options.preAttributes, context);
+    const codeAttributes = getAttributes(options.codeAttributes, context);
+    
     if(!language) {
       // empty string means defer to the upstream escaping code built into markdown lib.
       return "";
