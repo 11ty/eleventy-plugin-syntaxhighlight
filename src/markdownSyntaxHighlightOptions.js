@@ -4,8 +4,8 @@ const HighlightLinesGroup = require("./HighlightLinesGroup");
 const getAttributes = require("./getAttributes");
 
 module.exports = function (options = {}) {
-  const preAttributes = getAttributes(options.preAttributes)
-  const codeAttributes = getAttributes(options.codeAttributes)
+  const preAttributes = getAttributes(options.preAttributes);
+  const codeAttributes = getAttributes(options.codeAttributes);
 
   return function(str, language) {
     if(!language) {

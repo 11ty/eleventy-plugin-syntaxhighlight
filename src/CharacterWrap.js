@@ -137,7 +137,9 @@ class CharacterWrap {
       }
     }
 
-    let highlightedContent = HighlightPairedShortcode(content, codeFormat, "", { trim: false });
+    let highlightedContent = HighlightPairedShortcode(content, codeFormat, "", {
+      trim: false
+    });
     let {document} = parseHTML(`<html><body>${highlightedContent}</body></html>`);
     let counter = new IndexCounter();
     let bodyEl = document.getElementsByTagName("body")[0];

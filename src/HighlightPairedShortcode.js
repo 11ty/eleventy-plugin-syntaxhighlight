@@ -4,8 +4,8 @@ const HighlightLinesGroup = require("./HighlightLinesGroup");
 const getAttributes = require("./getAttributes");
 
 module.exports = function (content, language, highlightNumbers, options = {}) {
-  const preAttributes = getAttributes(options.preAttributes)
-  const codeAttributes = getAttributes(options.codeAttributes)
+  const preAttributes = getAttributes(options.preAttributes);
+  const codeAttributes = getAttributes(options.codeAttributes);
 
   // default to on
   if(options.trim === undefined || options.trim === true) {

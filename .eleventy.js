@@ -12,6 +12,8 @@ module.exports = {
       alwaysWrapLineHighlights: false,
       // eligible to change the default to \n in a new major version.
       lineSeparator: "<br>",
+      preAttributes: {},
+      codeAttributes: {}
     }, options);
 
     // TODO hbs?
