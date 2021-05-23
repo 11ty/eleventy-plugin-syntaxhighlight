@@ -35,7 +35,7 @@ function getAttributes(attributes) {
     const formattedAttributes = Object.entries(attributes).map(
       attributeEntryToString
     );
-    return ` ${formattedAttributes}`;
+    return ` ${formattedAttributes.join(" ")}`;
   }
 }
 
