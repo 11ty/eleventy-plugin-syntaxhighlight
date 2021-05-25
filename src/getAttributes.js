@@ -7,7 +7,7 @@ function attributeEntryToString(attribute, context) {
 
   if (typeof value !== "string" && typeof value !== "number")
     throw new Error(
-      `Attribute "${key}" must have a value of type string or number not "${typeof value}".`
+      `Attribute "${key}" must have, or evaluate to, a value of type string or number, not "${typeof value}".`
     );
 
   return `${key}="${value}"`;
