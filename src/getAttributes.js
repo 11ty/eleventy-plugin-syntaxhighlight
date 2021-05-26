@@ -27,6 +27,10 @@ function attributeEntryToString(attribute, context) {
   ```
  *
  * @param {{[s: string]: string | number}} attributes An object with key-value pairs that represent attributes.
+ * @param {object} context An object with the current context.
+ * @param {string} context.content The code to parse and highlight.
+ * @param {string} context.language The language for the current instance.
+ * @param {object} context.options The options passed to the syntax highlighter.
  * @returns {string} A string containing the above HTML attributes preceded by a single space.
  */
 function getAttributes(attributes, context) {
