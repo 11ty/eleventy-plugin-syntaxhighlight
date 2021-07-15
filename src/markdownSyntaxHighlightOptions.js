@@ -8,6 +8,8 @@ module.exports = function (options = {}) {
   const codeAttributes = getAttributes(options.codeAttributes);
 
   return function(str, language) {
+    language = language || options.defaultLanguage;
+
     if(!language) {
       // empty string means defer to the upstream escaping code built into markdown lib.
       return "";
