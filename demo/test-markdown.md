@@ -34,6 +34,30 @@ let multilineString = `
 `;
 ```
 
+## Table
+
+no highlights
+
+``` markdown
+| State         | Capital |
+| :------------ | :------ |
+| New York      | Albany  |
+| Nebraska      | Lincoln |
+| New Hampshire | Concord |
+```
+
+markdown/3
+
+``` markdown/3
+| State         | Capital |
+| :------------ | :------ |
+| New York      | Albany  |
+| Nebraska      | Lincoln |
+| New Hampshire | Concord |
+```
+
+
+
 ## Dash line
 
 ```js/-
