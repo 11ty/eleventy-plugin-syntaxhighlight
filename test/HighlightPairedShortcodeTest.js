@@ -6,6 +6,26 @@ test("Base", async t => {
 alert();`, "js", "", { alwaysWrapLineHighlights: true }), `<pre class="language-js"><code class="language-js"><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>`);
 });
 
+test("Base with LF EOL, always wrap highlights", async t => {
+  t.is(await HighlightPairedShortcode('alert();\nalert();', 
+"js", "", { alwaysWrapLineHighlights: true }), `<pre class="language-js"><code class="language-js"><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>`);
+});
+
+test("Base with LF EOL, no wrap highlights", async t => {
+  t.is(await HighlightPairedShortcode('alert();\nalert();', 
+"js", "", { alwaysWrapLineHighlights: false }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+});
+
+test("Base with CRLF EOL, always wrap highlights", async t => {
+  t.is(await HighlightPairedShortcode('alert();\r\nalert();', 
+"js", "", { alwaysWrapLineHighlights: true }), `<pre class="language-js"><code class="language-js"><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>`);
+});
+
+test("Base with CRLF EOL, no wrap highlights", async t => {
+  t.is(await HighlightPairedShortcode('alert();\r\nalert();', 
+"js", "", { alwaysWrapLineHighlights: false }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+});
+
 test("Base with custom attributes", async t => {
   t.is(await HighlightPairedShortcode(`alert();
 alert();`, "js", "", { alwaysWrapLineHighlights: true, preAttributes: { tabindex: 0, 'data-testid': 'code' } }), `<pre class="language-js" tabindex="0" data-testid="code"><code class="language-js"><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>`);

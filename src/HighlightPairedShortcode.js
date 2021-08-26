@@ -16,11 +16,11 @@ module.exports = function (content, language, highlightNumbers, options = {}) {
   if( language === "text" ) {
     highlightedContent = content;
   } else {
-    highlightedContent = Prism.highlight(content.replace(/\r/g, ""), PrismLoader(language), language);
+    highlightedContent = Prism.highlight(content, PrismLoader(language), language);
   }
 
   let group = new HighlightLinesGroup(highlightNumbers);
-  let lines = highlightedContent.split("\n");
+  let lines = highlightedContent.split(/\r?\n/);
   lines = lines.map(function(line, j) {
     if(options.alwaysWrapLineHighlights || highlightNumbers) {
       let lineContent = group.getLineMarkup(j, line);
