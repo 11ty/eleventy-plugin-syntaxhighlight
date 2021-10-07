@@ -33,8 +33,8 @@
     "url": "https://github.com/11ty/eleventy-plugin-syntaxhighlight/issues"
   },
   "homepage": "https://www.11ty.dev/docs/plugins/syntaxhighlight/",
-  "peerDependencies": {
-    "@11ty/eleventy": ">=0.5.4"
+  "11ty": {
+    "compatibility": ">=0.5.4"
   },
   "devDependencies": {
     "ava": "^3.15.0",

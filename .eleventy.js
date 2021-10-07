@@ -1,3 +1,4 @@
+const pkg = require("./package.json");
 const Prism = require("prismjs");
 const hasTemplateFormat = require("./src/hasTemplateFormat");
 const HighlightPairedShortcode = require("./src/HighlightPairedShortcode");
@@ -8,6 +9,12 @@ const markdownPrismJs = require("./src/markdownSyntaxHighlightOptions");
 module.exports = {
   initArguments: { Prism },
   configFunction: function(eleventyConfig, options = {}) {
+    try {
+      eleventyConfig.versionCheck(pkg["11ty"].compatibility);
+    } catch(e) {
+      console.log( `WARN: Eleventy Plugin (${pkg.name}) Compatibility: ${e.message}` );
+    }
+
     options = Object.assign({
       alwaysWrapLineHighlights: false,
       // eligible to change the default to \n in a new major version.
