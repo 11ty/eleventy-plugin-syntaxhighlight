@@ -1,6 +1,6 @@
 {
   "name": "@11ty/eleventy-plugin-syntaxhighlight",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "A pack of Eleventy plugins for syntax highlighting for Markdown and Liquid templates.",
   "publishConfig": {
     "access": "public"
