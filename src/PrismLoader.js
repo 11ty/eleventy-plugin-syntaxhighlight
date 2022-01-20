@@ -8,6 +8,9 @@ const PrismAlias = require("./PrismNormalizeAlias");
 module.exports = function(language) {
   if(language.startsWith("diff-") && !Prism.languages.diff) {
     PrismLoader("diff");
+    // Bundled Plugin
+    require("prismjs/plugins/diff-highlight/prism-diff-highlight");
+
     return Prism.languages.diff;
   }
 
