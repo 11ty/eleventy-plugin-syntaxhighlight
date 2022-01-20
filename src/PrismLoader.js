@@ -10,19 +10,22 @@ module.exports = function(language) {
   if(language.startsWith("diff-")) {
     diffRemovedRawName = language.substr("diff-".length);
   }
-  let diffRemovedNormalizedName = PrismAlias(diffRemovedRawName);
+  // aliasing should ignore diff-
+  let aliasedName = PrismAlias(diffRemovedRawName);
 
-  if(!Prism.languages[ diffRemovedNormalizedName ]) {
-    PrismLoader(diffRemovedNormalizedName);
+  if(!Prism.languages[ aliasedName ]) {
+    PrismLoader(aliasedName);
   }
-  if(!Prism.languages[ diffRemovedNormalizedName ]) {
+  if(!Prism.languages[ aliasedName ]) {
     throw new Error(`"${language}" is not a valid Prism.js language for eleventy-plugin-syntaxhighlight`);
   }
+
   if(!language.startsWith("diff-")) {
-    return Prism.languages[ diffRemovedNormalizedName ];
+    return Prism.languages[ aliasedName ];
   }
 
-  let fullLanguageName = `diff-${diffRemovedNormalizedName}`;
+  // language has diff- prefix
+  let fullLanguageName = `diff-${aliasedName}`;
 
   if(!Prism.languages.diff) {
     PrismLoader("diff");
