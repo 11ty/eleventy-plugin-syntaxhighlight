@@ -1,5 +1,8 @@
 const Prism = require("prismjs");
 const PrismLoader = require("prismjs/components/index.js");
+// Avoid "Language does not exist: " console logs
+PrismLoader.silent = true;
+
 const PrismAlias = require("./PrismNormalizeAlias");
 
 module.exports = function(language) {
