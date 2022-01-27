@@ -43,7 +43,7 @@
     "markdown-it": "^12.3.2"
   },
   "dependencies": {
-    "linkedom": "^0.13.0",
+    "linkedom": "^0.13.2",
     "prismjs": "^1.26.0"
   },
   "ava": {
