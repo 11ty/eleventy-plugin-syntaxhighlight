@@ -37,6 +37,7 @@
     "compatibility": ">=0.5.4"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^1.0.0",
     "ava": "^4.0.1",
     "liquidjs": "^9.33.1",
     "markdown-it": "^12.3.2"
@@ -44,5 +45,12 @@
   "dependencies": {
     "linkedom": "^0.13.0",
     "prismjs": "^1.26.0"
+  },
+  "ava": {
+    "environmentVariables": {},
+    "failFast": false,
+    "files": [
+      "./test/*.js"
+    ]
   }
 }

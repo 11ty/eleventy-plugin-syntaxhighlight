@@ -44,6 +44,14 @@ module.exports = {
       // ```js/0,2-3
       eleventyConfig.addMarkdownHighlighter(markdownPrismJs(options));
     }
+
+    if( hasTemplateFormat(options.templateFormats, "11ty.js") ) {
+      eleventyConfig.addJavaScriptFunction("highlight", (language, content, highlight1, highlight2) => {
+        let highlightLines = [highlight1, highlight2].filter(entry => entry).join(" ");
+        let result = HighlightPairedShortcode(content, language, highlightLines, options);
+        return result;
+      });
+    }
   }
 };
 
