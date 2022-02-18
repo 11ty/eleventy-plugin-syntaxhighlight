@@ -1,4 +1,5 @@
 const Prism = require("prismjs");
+const PrismLanguages = require("prismjs/components.js").languages;
 const PrismLoader = require("./PrismLoader");
 const HighlightLinesGroup = require("./HighlightLinesGroup");
 const getAttributes = require("./getAttributes");
@@ -37,6 +38,6 @@ module.exports = function (options = {}) {
       return line;
     });
 
-    return `<pre class="language-${language}"${preAttributes}><code class="language-${language}"${codeAttributes}>${lines.join(options.lineSeparator || "<br>")}</code></pre>`;
+    return `<pre data-language-name="${PrismLanguages[language].title}" class="language-${language}"${preAttributes}><code class="language-${language}"${codeAttributes}>${lines.join(options.lineSeparator || "<br>")}</code></pre>`;
   };
 };
