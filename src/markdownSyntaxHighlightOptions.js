@@ -9,8 +9,13 @@ module.exports = function (options = {}) {
 
   return function(str, language) {
     if(!language) {
-      // empty string means defer to the upstream escaping code built into markdown lib.
-      return "";
+      if (options.defaultLanguage) {
+        language = options.defaultLanguage
+      }
+      else {
+        // empty string means defer to the upstream escaping code built into markdown lib.
+        return "";
+      }
     }
 
     let split = language.split("/");
