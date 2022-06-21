@@ -21,7 +21,7 @@ module.exports = {
       lineSeparator: "<br>",
       preAttributes: {},
       codeAttributes: {},
-      languageFilter: []
+      filterLanguages: []
     }, options);
 
     // TODO hbs?

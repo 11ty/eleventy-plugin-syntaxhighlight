@@ -19,7 +19,7 @@ module.exports = function (options = {}) {
       language = split.shift();
     }
 
-    if(filterLanguages.includes(language)) {
+    if (filterLanguages.includes(language)) {
       return `<pre class="${language} language-filtered no-highlight">${preAttributes}>${str}</pre>`;
     }
 
