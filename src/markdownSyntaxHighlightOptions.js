@@ -20,7 +20,9 @@ module.exports = function (options = {}) {
     }
 
     if (filterLanguages.includes(language)) {
-      return `<pre class="${language} language-filtered no-highlight">${preAttributes}>${str}</pre>`;
+      return `<pre class="${language} language-filtered no-highlight">${preAttributes}>
+  ${str}
+  </pre>`;
     }
 
     let html;
