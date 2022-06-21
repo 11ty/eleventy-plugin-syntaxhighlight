@@ -20,7 +20,8 @@ module.exports = {
       // eligible to change the default to \n in a new major version.
       lineSeparator: "<br>",
       preAttributes: {},
-      codeAttributes: {}
+      codeAttributes: {},
+      languageFilter: []
     }, options);
 
     // TODO hbs?

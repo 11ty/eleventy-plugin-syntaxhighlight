@@ -6,10 +6,15 @@ const getAttributes = require("./getAttributes");
 module.exports = function (content, language, highlightNumbers, options = {}) {
   const preAttributes = getAttributes(options.preAttributes);
   const codeAttributes = getAttributes(options.codeAttributes);
+  const filterLanguages = getAttributes(options.filterLanguages);
 
   // default to on
   if(options.trim === undefined || options.trim === true) {
     content = content.trim();
+  }
+
+  if (filterLanguages.includes(language)) {
+    return `<pre class="${language} language-filtered no-highlight">${preAttributes}>${content}</pre>`;
   }
 
   let highlightedContent;

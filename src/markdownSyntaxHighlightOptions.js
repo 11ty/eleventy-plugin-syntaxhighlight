@@ -6,6 +6,7 @@ const getAttributes = require("./getAttributes");
 module.exports = function (options = {}) {
   const preAttributes = getAttributes(options.preAttributes);
   const codeAttributes = getAttributes(options.codeAttributes);
+  const filterLanguages = getAttributes(options.filterLanguages);
 
   return function(str, language) {
     if(!language) {
@@ -16,6 +17,10 @@ module.exports = function (options = {}) {
     let split = language.split("/");
     if( split.length ) {
       language = split.shift();
+    }
+
+    if(filterLanguages.includes(language)) {
+      return `<pre class="${language} language-filtered no-highlight">${preAttributes}>${str}</pre>`;
     }
 
     let html;
