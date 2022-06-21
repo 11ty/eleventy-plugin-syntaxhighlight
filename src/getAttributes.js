@@ -27,11 +27,6 @@ function getAttributes(attributes) {
   if (!attributes) {
     return "";
   } else if (typeof attributes === "object") {
-
-    if (attributes.map !== undefined) {
-      return attributes;
-    }
-
     const formattedAttributes = Object.entries(attributes).map(
       attributeEntryToString
     );

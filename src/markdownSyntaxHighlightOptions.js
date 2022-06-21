@@ -6,7 +6,7 @@ const getAttributes = require("./getAttributes");
 module.exports = function (options = {}) {
   const preAttributes = getAttributes(options.preAttributes);
   const codeAttributes = getAttributes(options.codeAttributes);
-  const filterLanguages = getAttributes(options.filterLanguages);
+  const filterLanguages = options.filterLanguages || [];
 
   return function(str, language) {
     if(!language) {
