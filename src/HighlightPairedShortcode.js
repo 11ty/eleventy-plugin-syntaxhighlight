@@ -17,7 +17,7 @@ module.exports = function (content, language, highlightNumbers, options = {}) {
   }
 
   let group = new HighlightLinesGroup(highlightNumbers);
-  let lines = highlightedContent.split("\n");
+  let lines = highlightedContent.split(/\r?\n/);
   lines = lines.map(function(line, j) {
     if(options.alwaysWrapLineHighlights || highlightNumbers) {
       let lineContent = group.getLineMarkup(j, line);
