@@ -38,6 +38,26 @@ alert();
 \`\`\``).trim(), `<pre class="not-a-lang-js"><code class="language-js"><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>`);
 });
 
+test("Test Njk Alias", t => {
+  let mdLib = md();
+  mdLib.set({
+    highlight: markdownPrismJsOptions()
+  });
+  t.is(mdLib.render(`\`\`\`njk
+{% raw %}hello{% endraw %}
+\`\`\``).trim(), `<pre class="language-njk"><code class="language-njk"><span class="token delimiter punctuation">{%</span> <span class="token tag keyword">raw</span> <span class="token operator">%</span><span class="token punctuation">}</span><span class="token variable">hello</span><span class="token punctuation">{</span><span class="token operator">%</span> <span class="token variable">endraw</span> <span class="token operator">%</span><span class="token punctuation">}</span></code></pre>`);
+});
+
+test("Test Nunjucks Alias", t => {
+  let mdLib = md();
+  mdLib.set({
+    highlight: markdownPrismJsOptions()
+  });
+  t.is(mdLib.render(`\`\`\`nunjucks
+{% raw %}hello{% endraw %}
+\`\`\``).trim(), `<pre class="language-nunjucks"><code class="language-nunjucks"><span class="token delimiter punctuation">{%</span> <span class="token tag keyword">raw</span> <span class="token operator">%</span><span class="token punctuation">}</span><span class="token variable">hello</span><span class="token punctuation">{</span><span class="token operator">%</span> <span class="token variable">endraw</span> <span class="token operator">%</span><span class="token punctuation">}</span></code></pre>`);
+});
+
 
 // test("Test Markdown Highlighter Block Comment", t => {
 //   let mdLib = md();
