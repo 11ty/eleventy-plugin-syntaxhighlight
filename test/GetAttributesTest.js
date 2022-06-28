@@ -17,3 +17,29 @@ test("Object syntax", t => {
   t.is(ga({ hi: 1, bye: 2 }), ' hi="1" bye="2"');
   t.is(ga({ hi: function(ctx) { return '1'; }, bye: 2 }), ' hi="1" bye="2"');
 });
+
+test("Function callback", t => {
+  t.is(ga({ "data-lang": ({language}) => language }, {
+    language: "html"
+  }), ' class="language-html" data-lang="html"');
+});
+
+test("Function callback must return string or integer", t => {
+  t.throws(() => {
+    ga({ "data-lang": ({language}) => undefined }, {
+      language: "html"
+    })
+  });
+
+  t.throws(() => {
+    ga({ "data-lang": ({language}) => {} }, {
+      language: "html"
+    })
+  });
+
+  t.throws(() => {
+    ga({ "data-lang": ({language}) => false }, {
+      language: "html"
+    })
+  });
+});

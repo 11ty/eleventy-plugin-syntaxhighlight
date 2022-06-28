@@ -4,10 +4,6 @@ const HighlightLinesGroup = require("./HighlightLinesGroup");
 const getAttributes = require("./getAttributes");
 
 module.exports = function (content, language, highlightNumbers, options = {}) {
-  const context = { content: content, language: language,  options: options };
-  const preAttributes = getAttributes(options.preAttributes, context);
-  const codeAttributes = getAttributes(options.codeAttributes, context);
-
   // default to on
   if(options.trim === undefined || options.trim === true) {
     content = content.trim();
@@ -30,5 +26,9 @@ module.exports = function (content, language, highlightNumbers, options = {}) {
     return line;
   });
 
-  return `<pre class="language-${language}"${preAttributes}><code class="language-${language}"${codeAttributes}>` + lines.join(options.lineSeparator || "<br>") + "</code></pre>";
+  const context = { content: content, language: language,  options: options };
+  const preAttributes = getAttributes(options.preAttributes, context);
+  const codeAttributes = getAttributes(options.codeAttributes, context);
+
+  return `<pre${preAttributes}><code${codeAttributes}>` + lines.join(options.lineSeparator || "<br>") + "</code></pre>";
 };

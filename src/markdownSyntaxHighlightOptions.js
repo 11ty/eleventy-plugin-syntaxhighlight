@@ -5,14 +5,11 @@ const getAttributes = require("./getAttributes");
 
 module.exports = function (options = {}) {
   return function(str, language) {
-    const context = { content: str, language: language, options: options };
-    const preAttributes = getAttributes(options.preAttributes, context);
-    const codeAttributes = getAttributes(options.codeAttributes, context);
-    
     if(!language) {
       // empty string means defer to the upstream escaping code built into markdown lib.
       return "";
     }
+
 
     let split = language.split("/");
     if( split.length ) {
@@ -38,6 +35,10 @@ module.exports = function (options = {}) {
       return line;
     });
 
-    return `<pre class="language-${language}"${preAttributes}><code class="language-${language}"${codeAttributes}>${lines.join(options.lineSeparator || "<br>")}</code></pre>`;
+    const context = { content: str, language: language, options: options };
+    const preAttributes = getAttributes(options.preAttributes, context);
+    const codeAttributes = getAttributes(options.codeAttributes, context);
+
+    return `<pre${preAttributes}><code${codeAttributes}>${lines.join(options.lineSeparator || "<br>")}</code></pre>`;
   };
 };
