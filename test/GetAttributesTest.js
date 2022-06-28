@@ -15,4 +15,5 @@ test("Object syntax", t => {
   t.is(ga({}), "");
   t.is(ga({ hi: 1 }), ' hi="1"');
   t.is(ga({ hi: 1, bye: 2 }), ' hi="1" bye="2"');
+  t.is(ga({ hi: function(ctx) { return '1'; }, bye: 2 }), ' hi="1" bye="2"');
 });

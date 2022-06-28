@@ -1,7 +1,13 @@
-function attributeEntryToString([key, value]) {
+function attributeEntryToString(attribute, context) {
+  let [key, value] = attribute;
+
+  if (typeof value === "function") { // Callback must return a string or a number
+    value = value(context); // Run the provided callback and store the result
+  }
+
   if (typeof value !== "string" && typeof value !== "number")
     throw new Error(
-      `Attribute "${key}" must have a value of type string or number not "${typeof value}".`
+      `Attribute "${key}" must have, or evaluate to, a value of type string or number, not "${typeof value}".`
     );
 
   return `${key}="${value}"`;
@@ -15,21 +21,23 @@ function attributeEntryToString([key, value]) {
  * ```js
   getAttributes({
     tabindex: 0,
-    'data-language': 'JavaScript',
+    'data-language': function (context) { return context.language; },
     'data-otherStuff': 'value'
   }) // => ' tabindex="0" data-language="JavaScript" data-otherStuff="value"'
   ```
  *
  * @param {{[s: string]: string | number}} attributes An object with key-value pairs that represent attributes.
+ * @param {object} context An object with the current context.
+ * @param {string} context.content The code to parse and highlight.
+ * @param {string} context.language The language for the current instance.
+ * @param {object} context.options The options passed to the syntax highlighter.
  * @returns {string} A string containing the above HTML attributes preceded by a single space.
  */
-function getAttributes(attributes) {
+function getAttributes(attributes, context) {
   if (!attributes) {
     return "";
   } else if (typeof attributes === "object") {
-    const formattedAttributes = Object.entries(attributes).map(
-      attributeEntryToString
-    );
+    const formattedAttributes = Object.entries(attributes).map(entry => attributeEntryToString(entry, context));
     return formattedAttributes.length ? ` ${formattedAttributes.join(" ")}` : "";
   } else if (typeof attributes === "string") {
     throw new Error("Syntax highlighter plugin custom attributes on <pre> and <code> must be an object. Received: " + JSON.stringify(attributes));
