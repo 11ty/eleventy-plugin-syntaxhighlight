@@ -20,7 +20,16 @@ module.exports = function (options = {}) {
     if(language === "text") {
       html = str;
     } else {
-      html = Prism.highlight(str, PrismLoader(language), language);
+      let loader = PrismLoader(language, options)
+      if(!loader) {
+        if (options.ignoreInvalidLanguages == "md") {
+          return str;
+        }
+        
+        html = str;
+      } else {
+        html = Prism.highlight(str, loader, language);
+      }
     }
 
     let hasHighlightNumbers = split.length > 0;

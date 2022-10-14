@@ -13,7 +13,16 @@ module.exports = function (content, language, highlightNumbers, options = {}) {
   if( language === "text" ) {
     highlightedContent = content;
   } else {
-    highlightedContent = Prism.highlight(content, PrismLoader(language), language);
+    let loader = PrismLoader(language, options)
+    if( !loader ) {
+      if (options.ignoreInvalidLanguages == "md") {
+        return content;
+      }
+
+      highlightedContent = content;
+    } else {
+      highlightedContent = Prism.highlight(content, loader, language);
+    }
   }
 
   let group = new HighlightLinesGroup(highlightNumbers);

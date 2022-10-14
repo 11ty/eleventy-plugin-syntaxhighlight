@@ -5,7 +5,7 @@ PrismLoader.silent = true;
 
 const PrismAlias = require("./PrismNormalizeAlias");
 
-module.exports = function(language) {
+module.exports = function(language, options = {}) {
   let diffRemovedRawName = language;
   if(language.startsWith("diff-")) {
     diffRemovedRawName = language.substr("diff-".length);
@@ -17,7 +17,11 @@ module.exports = function(language) {
     PrismLoader(aliasedName);
   }
   if(!Prism.languages[ aliasedName ]) {
-    throw new Error(`"${language}" is not a valid Prism.js language for eleventy-plugin-syntaxhighlight`);
+    if (options.ignoreInvalidLanguages) {
+      return null;
+    } else {
+      throw new Error(`"${language}" is not a valid Prism.js language for eleventy-plugin-syntaxhighlight`);
+    }
   }
 
   if(!language.startsWith("diff-")) {
