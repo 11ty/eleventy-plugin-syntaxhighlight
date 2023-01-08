@@ -23,9 +23,26 @@ module.exports = function (options = {}) {
       html = Prism.highlight(str, PrismLoader(language), language);
     }
 
+        //  Prism's markdown highlighter renders tables
+        //  with a newline before the end of the corresponding
+        //  markdown line. It's hacky, but I'd rather
+        //  fix it up here than figure out how to
+        //  fix Prism's markdown highlighter
+
+    if(language === 'markdown'){
+      let wickedPattern=/<\/span>\n<\/span>/g
+      let goodReplacement='</span></span>\n'
+      html = html.replace(wickedPattern, goodReplacement)
+    }
+
     let hasHighlightNumbers = split.length > 0;
     let highlights = new HighlightLinesGroup(split.join("/"), "/");
-    let lines = html.split("\n").slice(0, -1); // The last line is empty.
+
+    let lines = html.split("\n")
+      //  The last line is usually empty
+      //  but not always -- such as tables
+    if (lines[lines.length-1] === "")
+      lines.pop()
 
     lines = lines.map(function(line, j) {
       if(options.alwaysWrapLineHighlights || hasHighlightNumbers) {
