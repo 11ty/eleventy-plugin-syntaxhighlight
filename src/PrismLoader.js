@@ -16,12 +16,9 @@ module.exports = function(language, options = {}) {
   if(!Prism.languages[ aliasedName ]) {
     PrismLoader(aliasedName);
   }
-  if(!Prism.languages[ aliasedName ]) {
-    if (options.ignoreInvalidLanguages) {
-      return null;
-    } else {
-      throw new Error(`"${language}" is not a valid Prism.js language for eleventy-plugin-syntaxhighlight`);
-    }
+
+  if(options.errorOnInvalidLanguage && !Prism.languages[ aliasedName ]) {
+    throw new Error(`"${language}" is not a valid Prism.js language for eleventy-plugin-syntaxhighlight`);
   }
 
   if(!language.startsWith("diff-")) {

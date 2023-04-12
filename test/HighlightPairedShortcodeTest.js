@@ -7,22 +7,22 @@ alert();`, "js", "", { alwaysWrapLineHighlights: true }), `<pre class="language-
 });
 
 test("Base with LF EOL, always wrap highlights", async t => {
-  t.is(await HighlightPairedShortcode('alert();\nalert();', 
+  t.is(await HighlightPairedShortcode('alert();\nalert();',
 "js", "", { alwaysWrapLineHighlights: true }), `<pre class="language-js"><code class="language-js"><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>`);
 });
 
 test("Base with LF EOL, no wrap highlights", async t => {
-  t.is(await HighlightPairedShortcode('alert();\nalert();', 
+  t.is(await HighlightPairedShortcode('alert();\nalert();',
 "js", "", { alwaysWrapLineHighlights: false }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 });
 
 test("Base with CRLF EOL, always wrap highlights", async t => {
-  t.is(await HighlightPairedShortcode('alert();\r\nalert();', 
+  t.is(await HighlightPairedShortcode('alert();\r\nalert();',
 "js", "", { alwaysWrapLineHighlights: true }), `<pre class="language-js"><code class="language-js"><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>`);
 });
 
 test("Base with CRLF EOL, no wrap highlights", async t => {
-  t.is(await HighlightPairedShortcode('alert();\r\nalert();', 
+  t.is(await HighlightPairedShortcode('alert();\r\nalert();',
 "js", "", { alwaysWrapLineHighlights: false }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 });
 
@@ -85,17 +85,22 @@ document.body.textContent = greeter(user);`
   t.is(await HighlightPairedShortcode(script, "ts"), `<pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">greeter</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token keyword">return</span> <span class="token string">"Hello, "</span> <span class="token operator">+</span> person<span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">let</span> user <span class="token operator">=</span> <span class="token string">"Jane User"</span><span class="token punctuation">;</span><br><br>document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token function">greeter</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 });
 
-test("Test loader invalid language", async t => {
+test("Test loader invalid language, with errorOnInvalidLanguage option", async t => {
   await t.throwsAsync(async () => {
-    await HighlightPairedShortcode("", "asldkjflksdaj");
-  });
+    await HighlightPairedShortcode("", "asldkjflksdaj", null, {
+      errorOnInvalidLanguage: true
+    });
+  }, { message: `"asldkjflksdaj" is not a valid Prism.js language for eleventy-plugin-syntaxhighlight` });
+});
+
+test("Test loader invalid language (should pass)", async t => {
+  t.is(await HighlightPairedShortcode("test test test", "asldkjflksdaj"), `<pre class="language-asldkjflksdaj"><code class="language-asldkjflksdaj">test test test</code></pre>`)
 });
 
 test("Test loader invalid language with ignore", async t => {
   let src = `hello
 hello`
-  t.is(await HighlightPairedShortcode(src, "asldkjflksdaj", "", { ignoreInvalidLanguages: "html" }), `<pre class="language-asldkjflksdaj"><code class="language-asldkjflksdaj">hello<br>hello</code></pre>`);  
-  t.is(await HighlightPairedShortcode(src, "asldkjflksdaj", "", { ignoreInvalidLanguages: "md" }), src);  
+  t.is(await HighlightPairedShortcode(src, "asldkjflksdaj"), `<pre class="language-asldkjflksdaj"><code class="language-asldkjflksdaj">hello<br>hello</code></pre>`);
 });
 
 test("Trim content option (defaults true)", async t => {

@@ -22,10 +22,6 @@ module.exports = function (options = {}) {
     } else {
       let loader = PrismLoader(language, options)
       if(!loader) {
-        if (options.ignoreInvalidLanguages == "md") {
-          return str;
-        }
-        
         html = str;
       } else {
         html = Prism.highlight(str, loader, language);

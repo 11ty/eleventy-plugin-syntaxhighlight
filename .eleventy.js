@@ -16,6 +16,7 @@ module.exports = {
     }
 
     options = Object.assign({
+      errorOnInvalidLanguage: false,
       alwaysWrapLineHighlights: false,
       // eligible to change the default to \n in a new major version.
       lineSeparator: "<br>",
@@ -23,7 +24,6 @@ module.exports = {
       codeAttributes: {}
     }, options);
 
-    // TODO hbs?
     if( hasTemplateFormat(options.templateFormats, "liquid") ) {
       eleventyConfig.addLiquidTag("highlight", (liquidEngine) => {
         // {% highlight js 0 2 %}
