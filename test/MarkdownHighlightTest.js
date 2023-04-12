@@ -58,6 +58,36 @@ test("Test Nunjucks Alias", t => {
 \`\`\``).trim(), `<pre class="language-nunjucks"><code class="language-nunjucks"><span class="token delimiter punctuation">{%</span> <span class="token tag keyword">raw</span> <span class="token operator">%</span><span class="token punctuation">}</span><span class="token variable">hello</span><span class="token punctuation">{</span><span class="token operator">%</span> <span class="token variable">endraw</span> <span class="token operator">%</span><span class="token punctuation">}</span></code></pre>`);
 });
 
+test("Test loader invalid language", t => {
+  let mdLib = md();
+  mdLib.set({
+    highlight: markdownPrismJsOptions()
+  });
+  t.throws(() => {
+    mdLib.render(`\`\`\`asldkjflksdaj
+hello
+\`\`\``);
+  });
+});
+
+test("Test loader invalid language with ignore", t => {
+  let src = `\`\`\`asldkjflksdaj
+hello
+\`\`\``;
+
+  let mdLib = md();
+  mdLib.set({
+    highlight: markdownPrismJsOptions({ ignoreInvalidLanguages: "html" })
+  });
+  t.is(mdLib.render(src).trim(), `<pre class="language-asldkjflksdaj"><code class="language-asldkjflksdaj">hello</code></pre>`);
+  
+  mdLib = md();
+  mdLib.set({
+    highlight: markdownPrismJsOptions({ ignoreInvalidLanguages: "md" })
+  });
+  t.is(mdLib.render(src).trim(), `<pre><code class="language-asldkjflksdaj">hello
+</code></pre>`);
+});
 
 // test("Test Markdown Highlighter Block Comment", t => {
 //   let mdLib = md();

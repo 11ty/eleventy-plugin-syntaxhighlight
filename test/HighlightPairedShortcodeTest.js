@@ -91,6 +91,13 @@ test("Test loader invalid language", async t => {
   });
 });
 
+test("Test loader invalid language with ignore", async t => {
+  let src = `hello
+hello`
+  t.is(await HighlightPairedShortcode(src, "asldkjflksdaj", "", { ignoreInvalidLanguages: "html" }), `<pre class="language-asldkjflksdaj"><code class="language-asldkjflksdaj">hello<br>hello</code></pre>`);  
+  t.is(await HighlightPairedShortcode(src, "asldkjflksdaj", "", { ignoreInvalidLanguages: "md" }), src);  
+});
+
 test("Trim content option (defaults true)", async t => {
   t.is(await HighlightPairedShortcode(` alert();
 alert(); `, "js", "", {}), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
