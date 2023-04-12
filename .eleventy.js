@@ -45,13 +45,12 @@ module.exports = {
       eleventyConfig.addMarkdownHighlighter(markdownPrismJs(options));
     }
 
-    if( hasTemplateFormat(options.templateFormats, "11ty.js") ) {
-      eleventyConfig.addJavaScriptFunction("highlight", (language, content, highlight1, highlight2) => {
-        let highlightLines = [highlight1, highlight2].filter(entry => entry).join(" ");
-        let result = HighlightPairedShortcode(content, language, highlightLines, options);
-        return result;
-      });
-    }
+    // we need to add this as many template languages rely on JavaScript functions (not just 11ty.js)
+    eleventyConfig.addJavaScriptFunction("highlight", (language, content, highlight1, highlight2) => {
+      let highlightLines = [highlight1, highlight2].filter(entry => entry).join(" ");
+      let result = HighlightPairedShortcode(content, language, highlightLines, options);
+      return result;
+    });
   }
 };
 
