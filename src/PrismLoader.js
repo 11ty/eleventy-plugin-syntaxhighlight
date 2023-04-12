@@ -13,7 +13,7 @@ module.exports = function(language, options = {}) {
   // aliasing should ignore diff-
   let aliasedName = PrismAlias(diffRemovedRawName);
 
-  if(!Prism.languages[ aliasedName ]) {
+  if(!Prism.languages[ aliasedName ]) { // matches `diff` too
     PrismLoader(aliasedName);
   }
 
@@ -30,9 +30,10 @@ module.exports = function(language, options = {}) {
 
   if(!Prism.languages.diff) {
     PrismLoader("diff");
-    // Bundled Plugin
-    require("prismjs/plugins/diff-highlight/prism-diff-highlight");
   }
+
+  // Bundled Plugin
+  require("prismjs/plugins/diff-highlight/prism-diff-highlight");
 
   // Store into with aliased keys
   //   ts -> diff-typescript
