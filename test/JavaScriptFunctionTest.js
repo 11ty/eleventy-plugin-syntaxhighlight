@@ -12,7 +12,7 @@ test("JavaScript Function", async t => {
 	t.is(`<pre class="language-js"><code class="language-js"><span class="token keyword">var</span> test<span class="token punctuation">;</span></code></pre>`, rendered);
 });
 
-test("JavaScript Function Diff", async t => {
+test("JavaScript Function Diff #76", async t => {
   let elev = new Eleventy("./test/11tyjs-diff/", "./test/11tyjs-diff/_site/", {
     configPath: "./test/11tyjs-diff/.eleventy.js"
   });
