@@ -30,7 +30,12 @@ module.exports = function (options = {}) {
 
     let hasHighlightNumbers = split.length > 0;
     let highlights = new HighlightLinesGroup(split.join("/"), "/");
-    let lines = html.split("\n").slice(0, -1); // The last line is empty.
+    let lines = html.split("\n");
+
+    // Trim last line if it is empty
+    if (lines[lines.length - 1] === "") {
+      lines = lines.slice(0, -1);
+    }
 
     lines = lines.map(function(line, j) {
       if(options.alwaysWrapLineHighlights || hasHighlightNumbers) {
