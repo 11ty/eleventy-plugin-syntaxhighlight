@@ -3,7 +3,6 @@ const Prism = require("prismjs");
 const hasTemplateFormat = require("./src/hasTemplateFormat");
 const HighlightPairedShortcode = require("./src/HighlightPairedShortcode");
 const LiquidHighlightTag = require("./src/LiquidHighlightTag");
-const CharacterWrap = require("./src/CharacterWrap");
 const markdownPrismJs = require("./src/markdownSyntaxHighlightOptions");
 
 module.exports = {
@@ -44,7 +43,7 @@ module.exports = {
       eleventyConfig.addMarkdownHighlighter(markdownPrismJs(options));
     }
 
-    // we need to add this as many template languages rely on JavaScript functions (not just 11ty.js)
+    // we need to add this as many template languages (Vue, WebC) rely on JavaScript functions (not just 11ty.js)
     eleventyConfig.addJavaScriptFunction("highlight", (language, content, highlight1, highlight2) => {
       let highlightLines = [highlight1, highlight2].filter(entry => entry).join(" ");
       let result = HighlightPairedShortcode(content, language, highlightLines, options);
@@ -54,4 +53,3 @@ module.exports = {
 };
 
 module.exports.pairedShortcode = HighlightPairedShortcode;
-module.exports.CharacterWrap = CharacterWrap;

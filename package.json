@@ -37,13 +37,11 @@
     "compatibility": ">=0.5.4"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.2",
-    "ava": "^5.0.1",
-    "liquidjs": "^9.42.1",
+    "@11ty/eleventy": "^2.0.1",
+    "ava": "^5.2.0",
     "markdown-it": "^13.0.1"
   },
   "dependencies": {
-    "linkedom": "^0.14.19",
     "prismjs": "^1.29.0"
   },
   "ava": {
