@@ -16,10 +16,9 @@ module.exports = {
     }
 
     options = Object.assign({
+      lineSeparator: "\n",
       errorOnInvalidLanguage: false,
       alwaysWrapLineHighlights: false,
-      // eligible to change the default to \n in a new major version.
-      lineSeparator: "<br>",
       preAttributes: {},
       codeAttributes: {}
     }, options);
