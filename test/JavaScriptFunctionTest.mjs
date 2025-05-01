@@ -1,5 +1,5 @@
-const test = require("ava");
-const Eleventy = require('@11ty/eleventy');
+import test from "ava";
+import Eleventy from '@11ty/eleventy';
 
 test("JavaScript Function", async t => {
   let elev = new Eleventy("./test/11tyjs-test/", "./test/11tyjs-test/_site/", {
