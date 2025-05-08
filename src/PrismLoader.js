@@ -3,6 +3,11 @@ const PrismLoader = require("prismjs/components/index.js");
 // Avoid "Language does not exist: " console logs
 PrismLoader.silent = true;
 
+const PrismDiff = require("prismjs/components/prism-diff.js");
+
+// Load diff-highlight plugin
+require("prismjs/plugins/diff-highlight/prism-diff-highlight");
+
 const PrismAlias = require("./PrismNormalizeAlias");
 
 module.exports = function(language, options = {}) {
@@ -28,17 +33,10 @@ module.exports = function(language, options = {}) {
   // language has diff- prefix
   let fullLanguageName = `diff-${aliasedName}`;
 
-  if(!Prism.languages.diff) {
-    PrismLoader("diff");
-  }
-
-  // Bundled Plugin
-  require("prismjs/plugins/diff-highlight/prism-diff-highlight");
-
   // Store into with aliased keys
   //   ts -> diff-typescript
   //   js -> diff-javascript
-  Prism.languages[ fullLanguageName ] = Prism.languages.diff;
+  Prism.languages[ fullLanguageName ] = PrismDiff;
 
   return Prism.languages[ fullLanguageName ];
 };
