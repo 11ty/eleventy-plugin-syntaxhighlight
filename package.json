@@ -48,7 +48,8 @@
     "environmentVariables": {},
     "failFast": false,
     "files": [
-      "./test/*.js"
+      "./test/*.js",
+      "./test/*.mjs"
     ]
   }
 }
