@@ -1,5 +1,3 @@
-const Prism = require("prismjs");
-
 const HARDCODED_ALIASES = {
   njk: "jinja2",
   nunjucks: "jinja2",
