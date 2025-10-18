@@ -1,3 +1,5 @@
+import { escapeAttribute } from "entities/escape";
+
 function attributeEntryToString(attribute, context) {
   let [key, value] = attribute;
 
@@ -11,6 +13,9 @@ function attributeEntryToString(attribute, context) {
     );
   }
 
+  if(typeof value === "string") {
+    value = escapeAttribute(value);
+  }
   return `${key}="${value}"`;
 }
 

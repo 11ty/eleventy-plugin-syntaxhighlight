@@ -41,6 +41,7 @@
     "markdown-it": "^14.1.0"
   },
   "dependencies": {
+    "entities": "^7.0.0",
     "prismjs": "^1.30.0"
   },
   "ava": {
