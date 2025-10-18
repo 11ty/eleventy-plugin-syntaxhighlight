@@ -33,3 +33,14 @@ test("diff-javascript #80", async t => {
   t.is(json.length, 1);
 	t.is(json[0].content.trim(), `<pre class="language-diff-javascript"><code class="language-diff-javascript"><span class="token deleted-sign deleted language-javascript"><span class="token prefix deleted">-</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span></code></pre>`);
 });
+
+test("Issue #77", async t => {
+  let json = await render("issue-77.md", `<div>{% highlight "js" %}
+// line 1
+
+// line 3
+{% endhighlight %}</div>`);
+
+  let content = json[0].content.trim();
+	t.is(content, `<div>\n<pre class="language-js"><code class="language-js"><span class="token comment">// line 1</span>\n\n<span class="token comment">// line 3</span></code></pre>\n</div>`);
+});

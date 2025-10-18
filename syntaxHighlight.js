@@ -4,6 +4,8 @@ import PrismLoader from "./src/PrismLoader.js";
 import hasTemplateFormat from "./src/hasTemplateFormat.js";
 import HighlightPairedShortcode from "./src/HighlightPairedShortcode.js";
 
+const TRIPLE_BACKTICK = "```";
+
 export default function(eleventyConfig, options){
   try {
     eleventyConfig.versionCheck(pkg["11ty"].compatibility);
@@ -13,7 +15,6 @@ export default function(eleventyConfig, options){
   options = Object.assign({
     init: function({Prism}){},
     lineSeparator: "\n",
-    lineHighlightSeparator: " ",
     errorOnInvalidLanguage: false,
     alwaysWrapLineHighlights: false,
     preAttributes: {},
@@ -25,20 +26,27 @@ export default function(eleventyConfig, options){
     PrismLoader(language)
   }
 
+  function shortcode(content, args) {
+    // {% highlight "js 0 2-3" %}
+    let [language, ...highlightNumbers] = (args || "").split(" ");
+
+    // Issue #77 avoid issues when nesting code blocks inside other elements (e.g. <div>{% highlight %}…</div>), introducing extra paragraphs
+    if(this.page.inputPath.endsWith(".md")) {
+      let highlightNumbersStr = highlightNumbers.length > 0 ? `/${highlightNumbers.join("/")}` : "";
+      return `\n\n${TRIPLE_BACKTICK}${language || ""}${highlightNumbersStr}
+${content}
+${TRIPLE_BACKTICK}\n\n`;
+    }
+
+    return HighlightPairedShortcode(content, language, highlightNumbers.join(" "), options);
+  }
+
   if( hasTemplateFormat(options.templateFormats, "liquid") ) {
-    eleventyConfig.addPairedLiquidShortcode("highlight", function(content, args) {
-      // {% highlight "js 0 2-3" %}
-      let [language, ...highlightNumbers] = (args || "").split(" ");
-      return HighlightPairedShortcode(content, language, highlightNumbers.join(" "), options);
-    });
+    eleventyConfig.addPairedLiquidShortcode("highlight", shortcode);
   }
 
   if( hasTemplateFormat(options.templateFormats, "njk") ) {
-    eleventyConfig.addPairedNunjucksShortcode("highlight", function(content, args) {
-      // {% highlight "js 0 2-3" %}
-      let [language, ...highlightNumbers] = (args || "").split(" ");
-      return HighlightPairedShortcode(content, language, highlightNumbers.join(" "), options);
-    });
+    eleventyConfig.addPairedNunjucksShortcode("highlight", shortcode);
   }
 
   if( hasTemplateFormat(options.templateFormats, "md") ) {
