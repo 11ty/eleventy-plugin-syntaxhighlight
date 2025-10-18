@@ -28,8 +28,7 @@ export default function (content, language, highlightNumbers, options = {}) {
     lines = lines.map(function(line, j) {
       return group.getLineMarkup(j, line);
     });
-    // default separator is "\n" upstream
-    transformedCode = lines.join(options.lineSeparator || "<br>");
+    transformedCode = lines.join(options.lineSeparator || "\n");
   }
 
   const context = { content: content, language: language,  options: options };
