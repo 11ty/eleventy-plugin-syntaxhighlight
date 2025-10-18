@@ -37,13 +37,11 @@ export default function (options = {}) {
       lines = lines.slice(0, -1);
     }
 
-    lines = lines.map(function(line, j) {
-      if(options.alwaysWrapLineHighlights || hasHighlightNumbers) {
-        let lineContent = highlights.getLineMarkup(j, line);
-        return lineContent;
-      }
-      return line;
-    });
+    if(options.alwaysWrapLineHighlights || hasHighlightNumbers) {
+      lines = lines.map(function(line, j) {
+        return highlights.getLineMarkup(j, line);
+      });
+    }
 
     const context = { content: str, language: language, options: options };
     const preAttributes = getAttributes(options.preAttributes, context);

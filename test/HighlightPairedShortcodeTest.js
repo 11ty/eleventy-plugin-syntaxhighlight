@@ -13,7 +13,7 @@ test("Base with LF EOL, always wrap highlights", async t => {
 
 test("Base with LF EOL, no wrap highlights", async t => {
   t.is(await HighlightPairedShortcode('alert();\nalert();',
-"js", "", { alwaysWrapLineHighlights: false }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+"js", "", { alwaysWrapLineHighlights: false }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>\n<span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 });
 
 test("Base with CRLF EOL, always wrap highlights", async t => {
@@ -23,7 +23,7 @@ test("Base with CRLF EOL, always wrap highlights", async t => {
 
 test("Base with CRLF EOL, no wrap highlights", async t => {
   t.is(await HighlightPairedShortcode('alert();\r\nalert();',
-"js", "", { alwaysWrapLineHighlights: false }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+"js", "", { alwaysWrapLineHighlights: false }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>\r\n<span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 });
 
 test("Base with custom attributes", async t => {
@@ -42,7 +42,7 @@ alert();`, "js", "", {
 
 test("Base No line highlights", async t => {
   t.is(await HighlightPairedShortcode(`alert();
-alert();`, "js", ""), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+alert();`, "js", ""), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>\n<span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 });
 
 test("Highlight Active", async t => {
@@ -70,7 +70,7 @@ let user = "Jane User";
 
 document.body.textContent = greeter(user);`;
 
-  t.is(await HighlightPairedShortcode(script, "typescript"), `<pre class="language-typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">greeter</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token keyword">return</span> <span class="token string">"Hello, "</span> <span class="token operator">+</span> person<span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">let</span> user <span class="token operator">=</span> <span class="token string">"Jane User"</span><span class="token punctuation">;</span><br><br>document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token function">greeter</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+  t.is(await HighlightPairedShortcode(script, "typescript"), `<pre class="language-typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">greeter</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span> <span class="token punctuation">{</span>\n    <span class="token keyword">return</span> <span class="token string">"Hello, "</span> <span class="token operator">+</span> person<span class="token punctuation">;</span>\n<span class="token punctuation">}</span>\n\n<span class="token keyword">let</span> user <span class="token operator">=</span> <span class="token string">"Jane User"</span><span class="token punctuation">;</span>\n\ndocument<span class="token punctuation">.</span>body<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token function">greeter</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 });
 
 test("Test loader ts", async t => {
@@ -82,7 +82,7 @@ let user = "Jane User";
 
 document.body.textContent = greeter(user);`
 
-  t.is(await HighlightPairedShortcode(script, "ts"), `<pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">greeter</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token keyword">return</span> <span class="token string">"Hello, "</span> <span class="token operator">+</span> person<span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">let</span> user <span class="token operator">=</span> <span class="token string">"Jane User"</span><span class="token punctuation">;</span><br><br>document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token function">greeter</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+  t.is(await HighlightPairedShortcode(script, "ts"), `<pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">greeter</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span> <span class="token punctuation">{</span>\n    <span class="token keyword">return</span> <span class="token string">"Hello, "</span> <span class="token operator">+</span> person<span class="token punctuation">;</span>\n<span class="token punctuation">}</span>\n\n<span class="token keyword">let</span> user <span class="token operator">=</span> <span class="token string">"Jane User"</span><span class="token punctuation">;</span>\n\ndocument<span class="token punctuation">.</span>body<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token function">greeter</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 });
 
 test("Test loader invalid language, with errorOnInvalidLanguage option", async t => {
@@ -100,17 +100,17 @@ test("Test loader invalid language (should pass)", async t => {
 test("Test loader invalid language with ignore", async t => {
   let src = `hello
 hello`
-  t.is(await HighlightPairedShortcode(src, "asldkjflksdaj"), `<pre class="language-asldkjflksdaj"><code class="language-asldkjflksdaj">hello<br>hello</code></pre>`);
+  t.is(await HighlightPairedShortcode(src, "asldkjflksdaj"), `<pre class="language-asldkjflksdaj"><code class="language-asldkjflksdaj">hello\nhello</code></pre>`);
 });
 
 test("Trim content option (defaults true)", async t => {
   t.is(await HighlightPairedShortcode(` alert();
-alert(); `, "js", "", {}), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+alert(); `, "js", "", {}), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>\n<span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 
   t.is(await HighlightPairedShortcode(` alert();
-alert(); `, "js", "", { trim: true }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
+alert(); `, "js", "", { trim: true }), `<pre class="language-js"><code class="language-js"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>\n<span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>`);
 
   t.is(await HighlightPairedShortcode(` alert();
-alert(); `, "js", "", { trim: false }), `<pre class="language-js"><code class="language-js"> <span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre>`);
+alert(); `, "js", "", { trim: false }), `<pre class="language-js"><code class="language-js"> <span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>\n<span class="token function">alert</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre>`);
 
 });

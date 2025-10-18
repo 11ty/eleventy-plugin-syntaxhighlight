@@ -21,19 +21,20 @@ export default function (content, language, highlightNumbers, options = {}) {
     }
   }
 
-  let group = new HighlightLinesGroup(highlightNumbers);
-  let lines = highlightedContent.split(/\r?\n/);
-  lines = lines.map(function(line, j) {
-    if(options.alwaysWrapLineHighlights || highlightNumbers) {
-      let lineContent = group.getLineMarkup(j, line);
-      return lineContent;
-    }
-    return line;
-  });
+  let transformedCode = highlightedContent;
+  if(options.alwaysWrapLineHighlights || highlightNumbers) {
+    let group = new HighlightLinesGroup(highlightNumbers);
+    let lines = highlightedContent.split(/\r?\n/);
+    lines = lines.map(function(line, j) {
+      return group.getLineMarkup(j, line);
+    });
+    // default separator is "\n" upstream
+    transformedCode = lines.join(options.lineSeparator || "<br>");
+  }
 
   const context = { content: content, language: language,  options: options };
   const preAttributes = getAttributes(options.preAttributes, context);
   const codeAttributes = getAttributes(options.codeAttributes, context);
 
-  return `<pre${preAttributes}><code${codeAttributes}>` + lines.join(options.lineSeparator || "<br>") + "</code></pre>";
+  return `<pre${preAttributes}><code${codeAttributes}>${transformedCode}</code></pre>`;
 };
