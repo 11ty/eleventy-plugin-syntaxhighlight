@@ -1,4 +1,4 @@
-class HighlightLines {
+export default class HighlightLines {
   constructor(rangeStr) {
     this.highlights = this.convertRangeToHash(rangeStr);
   }
@@ -29,5 +29,3 @@ class HighlightLines {
     return !!this.highlights[lineNumber];
   }
 }
-
-module.exports = HighlightLines;

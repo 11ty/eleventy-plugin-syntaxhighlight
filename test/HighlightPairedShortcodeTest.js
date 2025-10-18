@@ -1,5 +1,5 @@
-const test = require("ava");
-const HighlightPairedShortcode = require("../src/HighlightPairedShortcode");
+import test from "ava";
+import HighlightPairedShortcode from "../src/HighlightPairedShortcode.js";
 
 test("Base", async t => {
   t.is(await HighlightPairedShortcode(`alert();

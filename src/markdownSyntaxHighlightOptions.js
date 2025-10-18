@@ -1,9 +1,9 @@
-const Prism = require("prismjs");
-const PrismLoader = require("./PrismLoader");
-const HighlightLinesGroup = require("./HighlightLinesGroup");
-const getAttributes = require("./getAttributes");
+import Prism from "prismjs";
+import PrismLoader from "./PrismLoader.js";
+import HighlightLinesGroup from "./HighlightLinesGroup.js";
+import getAttributes from "./getAttributes.js";
 
-module.exports = function (options = {}) {
+export default function (options = {}) {
   return function(str, language) {
     if(!language) {
       // empty string means defer to the upstream escaping code built into markdown lib.

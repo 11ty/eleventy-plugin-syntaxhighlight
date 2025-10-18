@@ -1,4 +1,4 @@
-module.exports = function(templateFormats = ["*"], format = false) {
+export default function(templateFormats = ["*"], format = false) {
   if(!Array.isArray(templateFormats)) {
     templateFormats = [templateFormats];
   }

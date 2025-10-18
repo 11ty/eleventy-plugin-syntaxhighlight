@@ -7,7 +7,7 @@ function normalizeNewLines(str) {
 
 test("Diff output escaped #75", async t => {
   let elev = new Eleventy("./test/issue-75/", "./test/issue-75/_site/", {
-    configPath: "./test/issue-75/.eleventy.js"
+    configPath: "./test/issue-75/eleventy.config.js"
   });
   let json = await elev.toJSON();
 
@@ -18,7 +18,7 @@ test("Diff output escaped #75", async t => {
 
 test("diff-javascript #80", async t => {
   let elev = new Eleventy("./test/issue-80/", "./test/issue-80/_site/", {
-    configPath: "./test/issue-80/.eleventy.js"
+    configPath: "./test/issue-80/eleventy.config.js"
   });
   let json = await elev.toJSON();
 

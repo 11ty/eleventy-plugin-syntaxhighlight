@@ -3,7 +3,7 @@ import Eleventy from '@11ty/eleventy';
 
 test("JavaScript Function", async t => {
   let elev = new Eleventy("./test/11tyjs-test/", "./test/11tyjs-test/_site/", {
-    configPath: "./test/11tyjs-test/.eleventy.js"
+    configPath: "./test/11tyjs-test/eleventy.config.js"
   });
   let json = await elev.toJSON();
 
@@ -14,7 +14,7 @@ test("JavaScript Function", async t => {
 
 test("JavaScript Function Diff #76", async t => {
   let elev = new Eleventy("./test/11tyjs-diff/", "./test/11tyjs-diff/_site/", {
-    configPath: "./test/11tyjs-diff/.eleventy.js"
+    configPath: "./test/11tyjs-diff/eleventy.config.js"
   });
   let json = await elev.toJSON();
 

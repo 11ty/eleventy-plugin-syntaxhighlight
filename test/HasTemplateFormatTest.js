@@ -1,5 +1,5 @@
-const test = require("ava");
-const hasTemplateFormat = require("../src/hasTemplateFormat");
+import test from "ava";
+import hasTemplateFormat from "../src/hasTemplateFormat.js";
 
 test("hasTemplateFormats", t => {
   t.true(hasTemplateFormat("*", "liquid"));

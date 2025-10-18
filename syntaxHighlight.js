@@ -1,12 +1,12 @@
-const pkg = require("./package.json");
-const Prism = require("prismjs");
-const PrismLoader = require("./src/PrismLoader");
-const hasTemplateFormat = require("./src/hasTemplateFormat");
-const HighlightPairedShortcode = require("./src/HighlightPairedShortcode");
-const LiquidHighlightTag = require("./src/LiquidHighlightTag");
-const markdownPrismJs = require("./src/markdownSyntaxHighlightOptions");
+import pkg from "./package.json" with { type: "json" };
+import Prism from "prismjs";
+import PrismLoader from "./src/PrismLoader.js";
+import hasTemplateFormat from "./src/hasTemplateFormat.js";
+import HighlightPairedShortcode from "./src/HighlightPairedShortcode.js";
+import { LiquidHighlightTag } from "./src/LiquidHighlightTag.js";
+import markdownPrismJs from "./src/markdownSyntaxHighlightOptions.js";
 
-module.exports = function(eleventyConfig, options){
+export default function(eleventyConfig, options){
   try {
     eleventyConfig.versionCheck(pkg["11ty"].compatibility);
   } catch(e) {
@@ -57,4 +57,4 @@ module.exports = function(eleventyConfig, options){
   options.init({Prism})
 };
 
-module.exports.pairedShortcode = HighlightPairedShortcode;
+export { HighlightPairedShortcode as pairedShortcode };

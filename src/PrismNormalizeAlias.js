@@ -3,9 +3,13 @@ const HARDCODED_ALIASES = {
   nunjucks: "jinja2",
 };
 
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+
 // This was added to make `ts` resolve to `typescript` correctly.
 // The Prism loader doesn’t seem to always handle aliasing correctly.
-module.exports = function(language) {
+export default function(language) {
   try {
     // Careful this is not public API stuff:
     // https://github.com/PrismJS/prism/issues/2146

@@ -1,6 +1,6 @@
-const syntaxHighlight = require("../.eleventy.js");
+import syntaxHighlight from "../syntaxHighlight.js";
 
-module.exports = function(eleventyConfig) {
+export default function(eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight, {
     // alwaysWrapLineHighlights: true
     preAttributes: { tabindex: 0 }

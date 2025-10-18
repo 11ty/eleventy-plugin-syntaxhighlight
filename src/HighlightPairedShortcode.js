@@ -1,9 +1,9 @@
-const Prism = require("prismjs");
-const PrismLoader = require("./PrismLoader");
-const HighlightLinesGroup = require("./HighlightLinesGroup");
-const getAttributes = require("./getAttributes");
+import Prism from "prismjs";
+import PrismLoader from "./PrismLoader.js";
+import HighlightLinesGroup from "./HighlightLinesGroup.js";
+import getAttributes from "./getAttributes.js";
 
-module.exports = function (content, language, highlightNumbers, options = {}) {
+export default function (content, language, highlightNumbers, options = {}) {
   // default to on
   if(options.trim === undefined || options.trim === true) {
     content = content.trim();

@@ -1,6 +1,6 @@
-const HighlightPairedShortcode = require("./HighlightPairedShortcode");
+import HighlightPairedShortcode from "./HighlightPairedShortcode.js";
 
-class LiquidHighlightTag {
+export class LiquidHighlightTag {
   constructor(liquidEngine) {
     this.liquidEngine = liquidEngine;
   }
@@ -45,5 +45,3 @@ class LiquidHighlightTag {
     return ret(this);
   }
 }
-
-module.exports = LiquidHighlightTag;

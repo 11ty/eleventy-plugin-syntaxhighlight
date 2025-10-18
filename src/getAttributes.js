@@ -34,7 +34,7 @@ function attributeEntryToString(attribute, context) {
  * @param {object} context.options The options passed to the syntax highlighter.
  * @returns {string} A string containing the above HTML attributes preceded by a single space.
  */
-function getAttributes(attributes, context = {}) {
+export default function getAttributes(attributes, context = {}) {
   let langClass = context.language ? `language-${context.language}` : "";
 
   if (!attributes) {
@@ -58,5 +58,3 @@ function getAttributes(attributes, context = {}) {
     throw new Error("Syntax highlighter plugin custom attributes on <pre> and <code> must be an object. Received: " + JSON.stringify(attributes));
   }
 }
-
-module.exports = getAttributes;

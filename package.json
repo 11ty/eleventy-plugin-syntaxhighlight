@@ -5,10 +5,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": ".eleventy.js",
+  "main": "syntaxHighlight.js",
   "scripts": {
     "test": "npx ava",
-    "demo": "npx @11ty/eleventy --input=demo --output=demo/_site --config=demo/eleventy-config.js",
     "start": "npx @11ty/eleventy --input=demo --output=demo/_site --config=demo/eleventy-config.js --serve"
   },
   "repository": {
@@ -49,7 +48,8 @@
     "failFast": false,
     "files": [
       "./test/*.js",
-      "./test/*.mjs"
+      "./test/*.cjs"
     ]
-  }
+  },
+  "type": "module"
 }

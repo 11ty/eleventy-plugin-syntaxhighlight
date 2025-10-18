@@ -1,6 +1,6 @@
-const HighlightLines = require("./HighlightLines");
+import HighlightLines from "./HighlightLines.js";
 
-class HighlightLinesGroup {
+export default class HighlightLinesGroup {
   constructor(str, delimiter) {
     this.init(str, delimiter);
   }
@@ -64,5 +64,3 @@ class HighlightLinesGroup {
     return this.splitLineMarkup( line, `<span class="highlight-line${extraClassesStr}">`, `</span>`);
   }
 }
-
-module.exports = HighlightLinesGroup;

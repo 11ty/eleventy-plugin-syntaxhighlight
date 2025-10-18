@@ -1,6 +1,6 @@
-const test = require("ava");
-const { Liquid } = require('liquidjs');
-const LiquidHighlightTag = require("../src/LiquidHighlightTag");
+import test from "ava";
+import { Liquid } from 'liquidjs';
+import { LiquidHighlightTag } from "../src/LiquidHighlightTag.js";
 
 async function renderLiquid(str, data = {}, engine = null) {
 	if(!engine) {
