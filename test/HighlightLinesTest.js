@@ -1,5 +1,5 @@
-const test = require("ava");
-const HighlightLines = require("../src/HighlightLines");
+import test from "ava";
+import HighlightLines from "../src/HighlightLines.js";
 
 test("HighlightLines empty", t => {
   let hilite = new HighlightLines("");

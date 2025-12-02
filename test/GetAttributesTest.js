@@ -1,5 +1,5 @@
-const test = require("ava");
-const ga = require("../src/getAttributes");
+import test from "ava";
+import ga from "../src/getAttributes.js";
 
 test("Falsy", t => {
   t.is(ga(false), "");

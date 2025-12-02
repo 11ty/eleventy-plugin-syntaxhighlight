@@ -1,14 +1,13 @@
 {
   "name": "@11ty/eleventy-plugin-syntaxhighlight",
-  "version": "5.0.2",
+  "version": "6.0.0-beta.1",
   "description": "Prism.js based syntax highlighting for Markdown, Liquid, Nunjucks, WebC, and 11ty.js templates.",
   "publishConfig": {
     "access": "public"
   },
-  "main": ".eleventy.js",
+  "main": "syntaxHighlight.js",
   "scripts": {
     "test": "npx ava",
-    "demo": "npx @11ty/eleventy --input=demo --output=demo/_site --config=demo/eleventy-config.js",
     "start": "npx @11ty/eleventy --input=demo --output=demo/_site --config=demo/eleventy-config.js --serve"
   },
   "repository": {
@@ -42,6 +41,7 @@
     "markdown-it": "^14.1.0"
   },
   "dependencies": {
+    "entities": "^7.0.0",
     "prismjs": "^1.30.0"
   },
   "ava": {
@@ -49,7 +49,8 @@
     "failFast": false,
     "files": [
       "./test/*.js",
-      "./test/*.mjs"
+      "./test/*.cjs"
     ]
-  }
+  },
+  "type": "module"
 }

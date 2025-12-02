@@ -1,5 +1,5 @@
-<script webc:type="render" webc:is="template" webc:raw webc:nokeep>
-function() {
+<script webc:type="js" webc:is="template" webc:raw webc:nokeep>
+export default function() {
 	let errorPrefix = "[11ty/eleventy-plugin-syntaxhighlight] <syntax-highlight> WebC component: ";
 
 	if(!this.slots || !this.slots.text) {

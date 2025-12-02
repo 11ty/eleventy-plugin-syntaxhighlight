@@ -1,16 +1,17 @@
-const Prism = require("prismjs");
-const PrismLoader = require("prismjs/components/index.js");
+import Prism from "prismjs";
+import PrismLoader from "prismjs/components/index.js";
+
 // Avoid "Language does not exist: " console logs
 PrismLoader.silent = true;
 
-require("prismjs/components/prism-diff.js");
+import "prismjs/components/prism-diff.js";
 
 // Load diff-highlight plugin
-require("prismjs/plugins/diff-highlight/prism-diff-highlight");
+import "prismjs/plugins/diff-highlight/prism-diff-highlight.js";
 
-const PrismAlias = require("./PrismNormalizeAlias");
+import PrismAlias from "./PrismNormalizeAlias.js";
 
-module.exports = function(language, options = {}) {
+export default  function(language, options = {}) {
   let diffRemovedRawName = language;
   if(language.startsWith("diff-")) {
     diffRemovedRawName = language.substr("diff-".length);
