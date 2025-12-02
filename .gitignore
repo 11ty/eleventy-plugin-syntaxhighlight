@@ -1,4 +1,2 @@
 node_modules/
 _site/
-package-lock.json
-yarn.lock
